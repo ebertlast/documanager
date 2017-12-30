@@ -4,5 +4,16 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  appname: 'ScriptForms',
+  appnamesmall: 'S+',
+  companyname: 'Rendimos LTDA',
+  yearscopyrigth: '2017-2018',
+  currentuser: 'scriptformswebuser',
+  dbconsultas: 'SFConsultas',
+  apiurl: 'http://localhost:8082/scriptform.api/public',
+  urlFilesUploads: 'http://localhost:8082/scriptform.api/public/files/uploads/',
+  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/',
+  urlfacebook: 'https://www.facebook.com/ebert.zerpa',
+  urltwitter: 'https://twitter.com/ebertzerpa'
 };
