@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ArchivoRoutingModule } from './archivo-routing.module';
 import { ArchivoCargarComponent } from './componentes/archivo-cargar/archivo-cargar.component';
 import { ArchivoService } from './servicios/archivo.service';
+import { ArchivosComponent } from './componentes/archivos/archivos.component';
 
 @NgModule({
   imports: [
@@ -11,9 +12,9 @@ import { ArchivoService } from './servicios/archivo.service';
     ArchivoRoutingModule
   ],
   exports: [
-    ArchivoCargarComponent
+    ArchivoCargarComponent, ArchivosComponent
   ],
-  declarations: [ArchivoCargarComponent],
+  declarations: [ArchivoCargarComponent, ArchivosComponent],
   providers: [ArchivoService]
 })
 export class ArchivoModule { }

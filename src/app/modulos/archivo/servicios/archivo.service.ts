@@ -15,7 +15,7 @@ export class ArchivoService {
 
   cargar(postData: any, files: File[]) {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
-    console.log(_headers);
+    // console.log(_headers);
     // const _headers = new Headers({ 'Authorization': 'Bearer ' + '' });
     const _url = environment.apiurl + '/archivos/cargar';
     const _formData: FormData = new FormData();
@@ -33,7 +33,7 @@ export class ArchivoService {
         }
       }
     }
-    console.log(_formData);
+    // console.log(_formData);
     const returnReponse = new Promise((resolve, reject) => {
       this._http.post(_url, _formData, {
         headers: _headers

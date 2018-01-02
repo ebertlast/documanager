@@ -52,5 +52,16 @@
 </div>
 <div class="ibox-tools" [ngClass]="{'hide':archivos.length<=0}">
   <!-- <button (click)="cargarArchivos()" class="btn btn-primary btn-xs">Cargar archivos</button> -->
-  <button type="button" class="btn btn-primary btn-lg" (click)="cargarArchivos()">Cargar {{archivos.length}} archivos</button>
+  <button type="button" class="btn btn-primary btn-lg" (click)="cargarArchivos()" [ngClass]="{'hide': cargando}">Cargar {{archivos.length}} archivos</button>
+  <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+      <div class="sk-cube"></div>
+    </div>
 </div>

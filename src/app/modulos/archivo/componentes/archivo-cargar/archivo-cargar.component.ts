@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileGeneric } from '../../modelos/file-generic';
 import { ArchivoService } from '../../servicios/archivo.service';
 import { Helper } from '../../../../app-helper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-archivo-cargar',
@@ -9,10 +10,11 @@ import { Helper } from '../../../../app-helper';
   styleUrls: ['./archivo-cargar.component.css']
 })
 export class ArchivoCargarComponent implements OnInit {
-
+  cargando = false;
   constructor(
     private _helper: Helper,
-    private _archivoService: ArchivoService
+    private _archivoService: ArchivoService,
+    private _router: Router
   ) { }
 
   // #region Metodos de obtención y establecimiento de valores
@@ -47,11 +49,34 @@ export class ArchivoCargarComponent implements OnInit {
   }
 
   cargarArchivos() {
+    const me = this;
+    me._router.navigate(['escritorio/escritorio/archivo/listado']);
+
+  }
+  cargarArchivos2() {
+    const me = this;
     const postData = { field1: 'field1', field2: 'field2' };
-    const archivos: any = this.archivos;
-    this._archivoService.cargar(postData, archivos).then(
+    const archivos: any = me.archivos;
+    me.cargando = true;
+    me._archivoService.cargar(postData, archivos).then(
       archivosRegistrados => {
-        console.log(archivosRegistrados);
+        me.cargando = false;
+        if (archivosRegistrados === true) {
+          me._helper.Prompt(
+            'Archivos registrados',
+            'Archivos subidos y respaldados, debe ahora editar sus propiedades'
+          ).then(() => {
+            me._router.navigate(['/archivo/listado']);
+          });
+        } else {
+          me._helper.Prompt(
+            'Archivos no registrados',
+            `Ha ocurrido un error mientras intentabamos subir los archivos a nuestro servidor, vuelve a intentarlo.
+            Si el problema persiste no dudes en contactar a nuestro personal de tecnología`,
+            'error'
+          );
+        }
+
       }
     );
   }

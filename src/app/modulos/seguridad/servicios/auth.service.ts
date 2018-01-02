@@ -36,7 +36,7 @@ export class AuthService {
     if (!body.response && body.message && mostrarError) {
       this._helper.Notificacion(body.message || body.statusText, '', 'warning');
       if (body.logout === true) {
-        this._router.navigate(['/ingresar']);
+        this._router.navigate(['/seguridad/ingresar']);
       }
     }
 
