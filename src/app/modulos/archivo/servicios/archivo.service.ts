@@ -14,8 +14,9 @@ export class ArchivoService {
   constructor(private _http: Http, private _authService: AuthService) { }
 
   cargar(postData: any, files: File[]) {
-    // const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
-    const _headers = new Headers({ 'Authorization': 'Bearer ' + '' });
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    console.log(_headers);
+    // const _headers = new Headers({ 'Authorization': 'Bearer ' + '' });
     const _url = environment.apiurl + '/archivos/cargar';
     const _formData: FormData = new FormData();
     // console.log(files[0]);

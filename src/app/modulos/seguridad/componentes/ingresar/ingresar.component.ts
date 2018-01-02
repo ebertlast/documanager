@@ -34,6 +34,18 @@ export class IngresarComponent implements OnInit {
     $('body').attr('class', 'gray-bg');
     this.msjBienvenida = this._authService.MsjBienvenida();
     this._authService.CerrarSesion();
+
+    const me = this;
+    $('#email').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.ingresar();
+      }
+    });
+    $('#clave').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.ingresar();
+      }
+    });
   }
 
   ingresar() {

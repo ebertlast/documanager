@@ -17,6 +17,9 @@ export class AuthService {
       return new Model();
     }
     this.usuario = JSON.parse(localStorage.getItem(environment.currentuser))['usuario'];
+    if (this.usuario.avatar === '') {
+      this.usuario.avatar = 'assets/img/avatars/user-default.jpg';
+    }
     return this.usuario;
   }
 
@@ -96,7 +99,7 @@ export class AuthService {
     return this._http.get(environment.apiurl + '/usuarios/ingresar/' + usuario + '/' + clave)
       .map((response: Response) => {
         const data = this.ExtraerResultados(response);
-        console.log(data);
+        // console.log(data);
 
         this.usuario = this.Usuario();
         const userData: Model = data[0];
@@ -110,7 +113,7 @@ export class AuthService {
           userData
         ) {
           this.usuario = userData;
-          console.log(this.usuario.activo);
+          // console.log(this.usuario.activo);
           if (this.usuario.activo !== 1) {
             // tslint:disable-next-line:max-line-length
             this._helper.Notificacion('Tu usuario se encuentra inactivo en nuestra base de datos. Si esto es un error, comunicate por favor con tu supervisor o con el departamento de tecnologóa.', '', 'info');

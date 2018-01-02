@@ -3,6 +3,7 @@ import { environment } from '../../../../../environments/environment';
 import { Usuario } from '../../../seguridad/modelos/usuario';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
 declare var $: any;
+declare var cargarInspinia: any;
 @Component({
   selector: 'app-escritorio',
   templateUrl: './escritorio.component.html',
@@ -25,6 +26,7 @@ export class EscritorioComponent implements OnInit {
   ngOnInit() {
     $('body').attr('class', 'fixed-sidebar no-skin-config full-height-layout pace-done');
     this.usuario = this._authService.Usuario();
+    const me = this;
+    cargarInspinia();
   }
-
 }

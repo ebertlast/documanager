@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { environment } from '../environments/environment';
+import swal from 'sweetalert2'; // https://limonte.github.io/sweetalert2/
+
 declare var Snackbar: any;
 declare var $: any;
 declare var toastr: any;
@@ -83,7 +85,7 @@ export class Helper {
    * @param tonalidad Oscuridad de la tonalidad. Opciones: 300, 400, 500, 600, 700. Valor por Defecto: 500
    */
   public CambiarColorTema(color: string = 'light-blue', tonalidad: number = 500) {
-    $('#theme').attr('href', 'assets/css/style.' + color + '-' + tonalidad.toString() + '.min.css')
+    $('#theme').attr('href', 'assets/css/style.' + color + '-' + tonalidad.toString() + '.min.css');
   }
 
   /**
@@ -92,8 +94,39 @@ export class Helper {
    *   console.log(' Do something after the sleep!');
    * });
    */
-  public Sleep(time) {
+  public Sleep(time): Promise<any> {
     return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  public Prompt(_title: string, _text: string, _type = 'warning'): Promise<any> {
+    if (_type === 'warning') {
+      return swal({
+        title: _title,
+        text: _text,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, dese hacerlo',
+        cancelButtonText: 'No, cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      });
+    }
+    if (_type === 'error') {
+      return swal(
+        _title,
+        _text,
+        'error'
+      );
+    }
+    return swal(
+      _title,
+      _text,
+      'success'
+    );
   }
 
   public PaginaAnterior() {
