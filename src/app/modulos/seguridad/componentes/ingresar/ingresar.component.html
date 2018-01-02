@@ -1,0 +1,57 @@
+<div class="loginColumns animated fadeInDown">
+  <div class="row">
+
+    <div class="col-md-6">
+      <h2 class="font-bold">Bienvenido a {{environment.appname}}</h2>
+
+      <p>
+        {{msjBienvenida}}
+      </p>
+
+    </div>
+    <div class="col-md-6">
+      <div class="ibox-content">
+        <form class="m-t" role="form" id="formIngresar">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Usuario" required="" [(ngModel)]="usuario.email" name="email" id="email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Clave" required="" [(ngModel)]="usuario.clave" name="clave" id="clave">
+          </div>
+          <button type="button" (click)="ingresar()" class="btn btn-primary block full-width m-b" *ngIf="!cargando">Ingresar a {{environment.appnamesmall}}</button>
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+          </div>
+          <a href="#" [ngClass]="{'hide': cargando}">
+            <small>No recuerdo mi clave</small>
+          </a>
+
+          <p class="text-muted text-center hide">
+            <small>Do not have an account?</small>
+          </p>
+          <a class="btn btn-sm btn-white btn-block hide" href="register.html">Create an account</a>
+        </form>
+        <p class="m-t hide">
+          <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6">
+      Copyright {{environment.companyname}}
+    </div>
+    <div class="col-md-6 text-right">
+      <small>© {{environment.yearscopyrigth}}</small>
+    </div>
+  </div>
+</div>

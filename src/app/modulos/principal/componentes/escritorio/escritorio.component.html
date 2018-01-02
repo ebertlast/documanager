@@ -5,14 +5,15 @@
         <li class="nav-header">
           <div class="dropdown profile-element">
             <span>
-              <img alt="image" class="img-circle" src="assets/img/profile_small.jpg" />
+              <!-- <img alt="image" class="img-circle" src="assets/img/profile_small.jpg" /> -->
+              <img alt="image" class="img-circle" src="assets/img/avatars/user-default.jpg" height="40" />
             </span>
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <span class="clear">
                 <span class="block m-t-xs">
-                  <strong class="font-bold">David Williams</strong>
+                  <strong class="font-bold">{{usuario.nombres | capitalizar}}</strong>
                 </span>
-                <span class="text-muted text-xs block">Art Director
+                <span class="text-muted text-xs block">{{usuario.grupo}}
                   <b class="caret"></b>
                 </span>
               </span>
@@ -29,12 +30,12 @@
               </li>
               <li class="divider"></li>
               <li>
-                <a href="login.html">Logout</a>
+                <a routerLink="/seguridad/salir">Cerrar Sesión</a>
               </li>
             </ul>
           </div>
           <div class="logo-element">
-            IN+
+            {{environment.appnamesmall}}
           </div>
         </li>
         <li>
@@ -667,8 +668,8 @@
 
 
           <li>
-            <a href="login.html">
-              <i class="fa fa-sign-out"></i> Log out
+            <a routerLink="/seguridad/salir">
+              <i class="fa fa-sign-out"></i> Cerrar Sesión
             </a>
           </li>
         </ul>

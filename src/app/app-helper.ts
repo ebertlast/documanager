@@ -15,65 +15,50 @@ export class Helper {
    * Despliegue de mensajes tipo notificaciones >> https://notifyjs.com/
    * @param message Mensaje que se mostrará en el cuerpo de la notificación
    * @param type Tipo de notificación: success [default] (verde), error (rojo), warning (amarillo), info (azul))
-   * @param divId Identificador del control
-   * @param autoHide Destruir automáticamente el mensaje
-   * @param position Posición de la pantalla donde se desplegará la notificación: top-right, bottom-right  (Default), bottom-left,
+   * @param positionClass Posición de la pantalla donde se desplegará la notificación: top-right, bottom-right  (Default), bottom-left,
    * top-full-width, bottom-full-width, top-center, bottom-center
    */
-  public Notificacion(message: string, type = 'success', divId = '', autoHide = true, position = 'top right'): void {
-    const options = {
-      // whether to hide the notification on click
-      clickToHide: true,
-      // whether to auto-hide the notification
-      autoHide: autoHide,
-      // if autoHide, hide after milliseconds
-      autoHideDelay: 5000,
-      // show the arrow pointing at the element
-      arrowShow: true,
-      // arrow size in pixels
-      arrowSize: 5,
-      // position defines the notification position though uses the defaults below
-      position: position,
-      // default positions
-      elementPosition: 'bottom left',
-      globalPosition: 'top right',
-      // default style
-      style: 'bootstrap',
-      // default class (string or [string])
-      className: type,
-      // show animation
-      showAnimation: 'slideDown',
-      // show animation duration
-      showDuration: 400,
-      // hide animation
-      hideAnimation: 'slideUp',
-      // hide animation duration
-      hideDuration: 200,
-      // padding between element and notification
-      gap: 2
+  public Notificacion(message: string, title = '', type = 'success', positionClass = 'top right'): void {
+    toastr.options = {
+      'closeButton': true,
+      'debug': false,
+      'progressBar': true,
+      'preventDuplicates': false,
+      'positionClass': 'toast-top-right',
+      'onclick': null,
+      'showDuration': '400',
+      'hideDuration': '1000',
+      'timeOut': '7000',
+      'extendedTimeOut': '1000',
+      'showEasing': 'swing',
+      'hideEasing': 'linear',
+      'showMethod': 'fadeIn',
+      'hideMethod': 'fadeOut',
+      icon: {
+        error: 'fa fa-close',
+        info: 'fa fa-info',
+        success: 'something',
+        warning: 'something'
+      },
     };
     // console.log(message);
     switch (type) {
       case 'success':
-        this.Sonido();
+        toastr.success(message, title);
         break;
       case 'error':
-        this.Sonido('computer_error');
+        toastr.error(message, title);
         break;
       case 'warning':
-        this.Sonido('snap');
+        toastr.warning(message, title);
         break;
       case 'info':
-        // this.Sonido('water_droplet');
+        toastr.info(message, title);
         break;
       default:
         this.Sonido();
     }
-    if (divId === '') {
-      $.notify(message, options);
-    } else {
-      $('#' + divId).notify(message, options);
-    }
+
   }
 
   /**
@@ -178,138 +163,43 @@ export class Helper {
   /**
    * Reproduce efectos de sonidos para ser utilizados en botones y acciones de ventanas.
    * Documentación: http://ionden.com/a/plugins/ion.sound/en.html, https://github.com/IonDen/ion.sound
-   * @param audioName Nombre del audio a reproducir. Valor por defecto: branch_break, opciones: [button_tiny, computer_error, glass, water_droplet, snap, branch_break]
+   * @param audioName Nombre del audio a reproducir. Valor por defecto: branch_break,
+   * opciones: [button_tiny, computer_error, glass, water_droplet, snap, branch_break]
    */
   public Sonido(audioName: string = 'branch_break') {
     ion.sound.play(audioName);
   }
 
 
-  public ExportarExcel2(data: any) {
-    // console.log(data);
-    let columnas: string[] = [];
-    for (var i = 0; i < 1; i++) {
-      for (let key in data[i]) {
-        columnas.push(key);
-      }
-    }
-    // console.log(columnas);
-
-    // let tab: any;
-    // var textRange;
-    var j = 0;
-    // tab = document.getElementById('tablaFiltros'); // id of table
-
-    var tab_text = "<table border='2px'>";
-    // var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
-    // for (j = 0; j < tab.rows.length; j++) {
-    //   tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
-    //   //tab_text=tab_text+"</tr>";
-    // }
-    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
-    columnas.forEach(titulo => {
-      tab_text = tab_text + "<td>" + titulo + "</td>";
-    });
-    tab_text = tab_text + "</tr>";
-
-
-    tab_text = tab_text + "</table>";
-    // // tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
-    // // tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
-    // // tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
-    console.log(tab_text);
-    const ua = window.navigator.userAgent;
-    const msie = ua.indexOf("MSIE ");
-    let sa: any;
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-    {
-      const txtArea1 = $('#txtAreaExportExcel');
-      txtArea1.document.open("txt/html", "replace");
-      txtArea1.document.write(tab_text);
-      txtArea1.document.close();
-      txtArea1.focus();
-      sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Submit");
-    } else { // other browser not tested on IE 11
-      sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
-    }
-
-    return (sa);
-  }
-
-  public ExportarExcelBAD(e, data) {
-    console.log(e);
-    const dt = new Date();
-    const day = dt.getDate();
-    const month = dt.getMonth() + 1;
-    const year = dt.getFullYear();
-    const hour = dt.getHours();
-    const mins = dt.getMinutes();
-    const postfix = day + '.' + month + '.' + year + '_' + hour + '.' + mins;
-    // creating a temporary HTML link element (they support setting file names)
-    const a = document.createElement('a');
-    // getting data from our div that contains the HTML table
-    const data_type = 'data:application/vnd.ms-excel';
-
-
-    // var table_div = document.getElementById('dvData');
-    // var table_html = table_div.outerHTML.replace(/ /g, '%20');
-
-    /******************************************************* */
-    const columnas: string[] = [];
-    for (let i = 0; i < 1; i++) {
-      for (let key in data[i]) {
-        columnas.push(key);
-      }
-    }
-    const j = 0;
-    let tab_text = "<table border='2px'>";
-    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
-    columnas.forEach(titulo => {
-      tab_text = tab_text + "<td>" + titulo + "</td>";
-    });
-    tab_text = tab_text + "</tr>";
-    tab_text = tab_text + "</table>";
-    const table_html = tab_text;
-    /******************************************************** */
-    a.href = data_type + ', ' + table_html;
-    // setting the file name
-    a.download = 'exported_table_' + postfix + '.xls';
-    // triggering the function
-    a.click();
-    // just in case, prevent default behaviour
-    e.preventDefault();
-
-  }
-
   public ExportarExcel(data) {
     console.log(data);
     /******************************************************* */
     // #region Columnas
-    let columnas: string[] = [];
-    for (var i = 0; i < 1; i++) {
-      for (let key in data[i]) {
+    const columnas: string[] = [];
+    for (let _i = 0; _i < 1; _i++) {
+      for (let key in data[_i]) {
         columnas.push(key);
       }
     }
-    var j = 0;
-    var tab_text = "<table border='2px'>";
-    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
+    let j = 0;
+    let tab_text = '<table border="2px">';
+    tab_text = tab_text + '<tr bgcolor="#87AFC6">';
     columnas.forEach(titulo => {
-      tab_text = tab_text + "<th>" + titulo + "</th>";
+      tab_text = tab_text + '<th>' + titulo + '</th>';
     });
-    tab_text = tab_text + "</tr>";
+    tab_text = tab_text + '</tr>';
     // #endregion
-    for (var i = 0; i < data.length; i++) {
-      tab_text = tab_text + "<tr>";
+    for (let i = 0; i < data.length; i++) {
+      tab_text = tab_text + '<tr>';
       columnas.forEach(columna => {
-        tab_text = tab_text + "<td>";
+        tab_text = tab_text + '<td>';
         tab_text = tab_text + data[i][columna];
-        tab_text = tab_text + "</td>";
+        tab_text = tab_text + '</td>';
       });
-      tab_text = tab_text + "</tr>";
+      tab_text = tab_text + '</tr>';
     }
-    tab_text = tab_text + "</table>";
-    var table_html = tab_text;
+    tab_text = tab_text + '</table>';
+    const table_html = tab_text;
     /******************************************************** */
     window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
   }
@@ -391,5 +281,17 @@ export class Helper {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+  }
+
+  public BytesToSize(bytes: number): string {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) { return '0 Byte'; }
+    const v = Math.floor(Math.log(bytes) / Math.log(1024));
+    const i = parseInt(v.toString());
+    let result = Math.pow(1024, i);
+    result = bytes / result;
+    result = Math.round(result);
+    // return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
+    return result + ' ' + sizes[i];
   }
 }

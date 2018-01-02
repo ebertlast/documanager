@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { PrincipalRoutingModule } from './principal-routing.module';
 import { EscritorioComponent } from './componentes/escritorio/escritorio.component';
 import { ArchivoModule } from '../archivo/archivo.module';
+import { GenericoModule } from '../generico/generico.module';
 
 @NgModule({
   imports: [
     CommonModule,
     PrincipalRoutingModule,
-    ArchivoModule
+    ArchivoModule,
+    GenericoModule
   ],
   declarations: [EscritorioComponent]
 })

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
+import { Usuario } from '../../../seguridad/modelos/usuario';
+import { AuthService } from '../../../seguridad/servicios/auth.service';
 declare var $: any;
 @Component({
   selector: 'app-escritorio',
@@ -6,11 +9,22 @@ declare var $: any;
   styleUrls: ['./escritorio.component.css']
 })
 export class EscritorioComponent implements OnInit {
+  environment = environment;
+  constructor(
+    private _authService: AuthService
+  ) { }
 
-  constructor() { }
+  private _usuario: Usuario;
+  public get usuario(): Usuario {
+    return this._usuario;
+  }
+  public set usuario(v: Usuario) {
+    this._usuario = v;
+  }
 
   ngOnInit() {
     $('body').attr('class', 'fixed-sidebar no-skin-config full-height-layout pace-done');
+    this.usuario = this._authService.Usuario();
   }
 
 }

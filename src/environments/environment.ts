@@ -5,15 +5,15 @@
 
 export const environment = {
   production: false,
-  appname: 'ScriptForms',
-  appnamesmall: 'S+',
+  appname: 'DocuManager',
+  appnamesmall: 'DM+',
   companyname: 'Rendimos LTDA',
   yearscopyrigth: '2017-2018',
-  currentuser: 'scriptformswebuser',
+  currentuser: 'documanagerwebuser',
   dbconsultas: 'SFConsultas',
-  apiurl: 'http://localhost:8082/scriptform.api/public',
-  urlFilesUploads: 'http://localhost:8082/scriptform.api/public/files/uploads/',
-  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/',
+  apiurl: 'http://localhost:8082/documanager.api/public',
+  urlFilesUploads: 'http://localhost:8082/documanager.api/public/files/uploads/',
+  urlFilesDownload: 'http://localhost:8082/documanager.api/public/files/',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
   urltwitter: 'https://twitter.com/ebertzerpa'
 };
