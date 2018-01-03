@@ -39,88 +39,103 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <table class="table small m-b-xs">
-            <tbody>
-              <tr>
-                <td>
-                  <strong>142</strong> Projects
-                </td>
-                <td>
-                  <strong>22</strong> Followers
-                </td>
+        <div class="col-md-6">
+          <!-- pager -->
 
-              </tr>
-              <tr>
-                <td>
-                  <strong>61</strong> Comments
-                </td>
-                <td>
-                  <strong>54</strong> Articles
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>154</strong> Tags
-                </td>
-                <td>
-                  <strong>32</strong> Friends
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-        <div class="col-md-3">
-          <small>Sales in last 24h</small>
-          <h2 class="no-margins">206 480</h2>
-          <div id="sparkline1">
-            <canvas style="display: inline-block; width: 289.6px; height: 50px; vertical-align: top;" width="289" height="50"></canvas>
-          </div>
-        </div>
-
 
       </div>
 
-      <div class="ibox-content">
-
-        <h2>Página {{pager.currentPage}} de {{pager.totalPages}}</h2>
-        <p>
-          <strong>{{allItems.length}}</strong> hojas en total
-        </p>
-
-      </div>
     </div>
 
-    <!-- pager -->
-    <div class="text-center">
-      <div *ngIf="pager.pages && pager.pages.length>0" class="btn-group">
-        <button class="btn btn-white" type="button" (click)="set_page(1)" [ngClass]="{disabled:pager.currentPage === 1}" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <i class="fa fa-angle-double-left"></i>
-        </button>
-        <button class="btn btn-white" type="button" (click)="set_page(pager.currentPage - 1)" [ngClass]="{disabled:pager.currentPage === 1}"
-          [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <i class="fa fa-chevron-left"></i>
-        </button>
-        <button class="btn btn-white" [ngClass]="{active:pager.currentPage === page}" *ngFor="let page of pager.pages" (click)="set_page(page)">{{page}}</button>
-        <button class="btn btn-white" type="button" [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="set_page(pager.currentPage + 1)">
-          <i class="fa fa-chevron-right"></i>
-        </button>
-        <button class="btn btn-white" type="button" (click)="set_page(pager.totalPages)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-          [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <i class="fa fa-angle-double-right"></i>
-        </button>
+
+  </div>
+</div>
+<div class="text-center">
+  <div *ngIf="pager.pages && pager.pages.length>0" class="btn-group">
+    <button class="btn btn-white" type="button" (click)="set_page(1)" [ngClass]="{disabled:pager.currentPage === 1}" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <i class="fa fa-angle-double-left"></i>
+    </button>
+    <button class="btn btn-white" type="button" (click)="set_page(pager.currentPage - 1)" [ngClass]="{disabled:pager.currentPage === 1}"
+      [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="btn btn-white" [ngClass]="{active:pager.currentPage === page}" *ngFor="let page of pager.pages" (click)="set_page(page)">{{page}}</button>
+    <button class="btn btn-white" type="button" [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="set_page(pager.currentPage + 1)">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+    <button class="btn btn-white" type="button" (click)="set_page(pager.totalPages)" [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+      [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+      <i class="fa fa-angle-double-right"></i>
+    </button>
+  </div>
+</div>
+
+<div class="row" *ngIf="false">
+  <div class="panel-body">
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default" *ngFor="let imagen of pagedItems; let i = index">
+        <a data-toggle="collapse" data-parent="#accordion" href="#{{i}}" aria-expanded="false" class="collapsed">
+          <div class="panel-heading">
+            <h5 class="panel-title">
+              Página {{i+1+pager.startIndex}} de {{pager.totalItems}}
+            </h5>
+          </div>
+        </a>
+        <div id="{{i}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+          <div class="panel-body">
+            <img src="{{imagen}}" alt="">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <div class="row">
-  <div class="col-lg-4">
-    <div class="ibox ">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
       <div class="ibox-title">
-        <h5>Rotating plane</h5>
+        <h5>Mostrando {{itemsPorPagina}} páginas de {{pager.totalItems}}</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
       </div>
       <div class="ibox-content">
-        <img src="{{getImagen(0)}}"  height="500" alt="">
+        <div class="carousel slide" id="carousel3">
+          <div class="carousel-inner">
+            <div class="item gallery" *ngFor="let imagen of pagedItems; let i = index" [ngClass]="{'active': i===0}">
+              <div class="row">
+                <div class="col-lg-12">
+                  <img alt="Pág {{i+1+pager.startIndex}}" class="img-responsive" src="{{imagen}}">
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <a data-slide="prev" href="#carousel3" class="left carousel-control">
+            <span class="icon-prev"></span>
+          </a>
+          <a data-slide="next" href="#carousel3" class="right carousel-control">
+            <span class="icon-next"></span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

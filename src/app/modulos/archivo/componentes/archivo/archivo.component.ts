@@ -18,6 +18,7 @@ export class ArchivoComponent implements OnInit, OnDestroy {
   public pager: any = {};
   public allItems: string[] = [];
   public pagedItems: string[] = [];
+  public itemsPorPagina = 10;
   // #region Intento de hacer algo con PDF.js
   public url = '';
   public pdfDoc = null;
@@ -135,11 +136,11 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     // img.each(function () {
     //   animationHover(this, 'pulse');
     // });
-    img.elevateZoom({
-      zoomType: 'lens',
-      lensShape: 'round',
-      lensSize: 200
-    });
+    // img.elevateZoom({
+    //   zoomType: 'lens',
+    //   lensShape: 'round',
+    //   lensSize: 200
+    // });
 
   }
 
@@ -280,7 +281,7 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     if (page > this.pager.totalPages) {
       return;
     }
-    this.pager = this._pagerService.getPager(this.allItems.length, page, 6);
+    this.pager = this._pagerService.getPager(this.allItems.length, page, this.itemsPorPagina);
     // console.log(this.pager.startIndex);
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
     console.log(this.pagedItems);

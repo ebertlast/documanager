@@ -1,0 +1,13 @@
+/* :host {
+  position: absolute;
+  text-align: center;
+  overflow: hidden;
+  z-index: 100;
+  float: left;
+  background: rgb(255, 255, 255) no-repeat;
+  pointer-events: none;
+} */
+img{
+  width: 100%;
+  padding-bottom: 8%;
+}

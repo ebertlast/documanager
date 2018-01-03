@@ -10,13 +10,15 @@ import { GenericoModule } from '../generico/generico.module';
 import { ArchivoComponent } from './componentes/archivo/archivo.component';
 import { Archivo } from './modelos/archivo';
 import { LotesComponent } from './componentes/lotes/lotes.component';
+import { ImageZoomModule } from 'angular2-image-zoom';
 
 @NgModule({
   imports: [
     CommonModule,
     ArchivoRoutingModule,
     DataTablesModule,
-    GenericoModule
+    GenericoModule,
+    ImageZoomModule
   ],
   exports: [
     ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent
