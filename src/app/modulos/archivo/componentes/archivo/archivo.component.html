@@ -1,0 +1,95 @@
+<!-- <iframe id="iframe{{archivo.archivo_id}}" width="100%" height="200px" [src]="archivo.directorio+'/'+archivo.nombre | safe"
+  ></iframe> -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+
+      <div class="ibox-content">
+
+        <h2>Lightbox image gallery</h2>
+        <p>
+          <strong>blueimp Gallery</strong> is a touch-enabled, responsive and customizable image &amp; video gallery, carousel and
+          lightbox, optimized for both mobile and desktop web browsers. It features swipe, mouse and keyboard navigation,
+          transition effects, slideshow functionality, fullscreen support and on-demand content loading and can be extended
+          to display additional content types. Full documentation you can find at:
+          <a (click)="abrirArchivo(archivo.directorio+'/'+archivo.nombre)" target="_blank">{{archivo.directorio+'/'+archivo.nombre}}</a>
+        </p>
+
+        <div class="lightBoxGallery">
+          <a href="{{imagen}}" title="Página #{{i+1}}/{{archivo.paginas}}" data-gallery="" *ngFor="let imagen of imagenes; let i = index">
+            <img src="{{imagen}}" class="img-lg">
+          </a>
+
+          <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+          <div id="blueimp-gallery" class="blueimp-gallery">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row hide">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-content border-sbottom">
+        <h4>PDF.js</h4>
+        <p>
+          PDF.js is a Portable Document Format (PDF) viewer that is built with HTML5. PDF.js is community-driven and supported by Mozilla
+          Labs. The goal is to create a general-purpose, web standards-based platform for parsing and rendering PDFs. Full
+          documentation:
+          <a href="https://github.com/mozilla/pdf.js" target="_blank">https://github.com/mozilla/pdf.js</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center pdf-toolbar">
+
+  <div class="btn-group">
+    <button id="prev" class="btn btn-white">
+      <i class="fa fa-long-arrow-left"></i>
+      <span class="hidden-xs">Anterior</span>
+    </button>
+    <button id="next" class="btn btn-white">
+      <i class="fa fa-long-arrow-right"></i>
+      <span class="hidden-xs">Siguiente</span>
+    </button>
+    <button id="zoomin" class="btn btn-white">
+      <i class="fa fa-search-minus"></i>
+      <span class="hidden-xs">Acercar</span>
+    </button>
+    <button id="zoomout" class="btn btn-white">
+      <i class="fa fa-search-plus"></i>
+      <span class="hidden-xs">Alejar</span>
+    </button>
+    <button id="zoomfit" class="btn btn-white"> 100%</button>
+    <span class="btn btn-white hidden-xs">Página: </span>
+
+    <div class="input-group">
+      <input type="text" class="form-control" id="page_num">
+
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-white" id="page_count">/ {{archivo.paginas}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="text-center m-t-md">
+  <canvas id="the-canvas" class="pdfcanvas border-left-right border-top-bottom b-r-md"></canvas>
+</div>

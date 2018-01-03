@@ -13,8 +13,8 @@ export const environment = {
   currentuser: 'documanagerwebuser',
   dbconsultas: 'DMConsultas',
   apiurl: 'http://localhost:8082/documanager.api/public',
-  urlFilesUploads: 'http://localhost:8082/documanager.api/public/files/uploads/',
-  urlFilesDownload: 'http://localhost:8082/documanager.api/public/files/',
+  urlFilesUploads: 'http://localhost:8082/documanager.api/public',
+  urlFilesDownload: 'http://localhost:8082/documanager.api/public',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
   urltwitter: 'https://twitter.com/ebertzerpa'
 };

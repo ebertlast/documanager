@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FileGeneric } from '../../modelos/file-generic';
 import { ArchivoService } from '../../servicios/archivo.service';
 import { Helper } from '../../../../app-helper';
@@ -28,6 +28,7 @@ export class ArchivoCargarComponent implements OnInit {
   }
 
   // #endregion
+
   ngOnInit() {
     // this._helper.Notificacion('Pruebas');
     // this._helper.Notificacion('Pruebas', 'Titulos', 'error');
@@ -48,12 +49,12 @@ export class ArchivoCargarComponent implements OnInit {
     // const file: FileGeneric = this.archivos[0];
   }
 
-  cargarArchivos() {
+  cargarArchivos2() {
     const me = this;
     me._router.navigate(['escritorio/escritorio/archivo/listado']);
 
   }
-  cargarArchivos2() {
+  cargarArchivos() {
     const me = this;
     const postData = { field1: 'field1', field2: 'field2' };
     const archivos: any = me.archivos;
@@ -66,7 +67,7 @@ export class ArchivoCargarComponent implements OnInit {
             'Archivos registrados',
             'Archivos subidos y respaldados, debe ahora editar sus propiedades'
           ).then(() => {
-            me._router.navigate(['/archivo/listado']);
+            me._router.navigate(['escritorio/escritorio/archivo/listado']);
           });
         } else {
           me._helper.Prompt(

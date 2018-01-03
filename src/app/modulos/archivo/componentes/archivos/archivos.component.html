@@ -1,3 +1,26 @@
-<p>
-  archivos works!
-</p>
+<div class="wrapper wrapper-content animated fadeInRightBig">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>Identificador</th>
+        <th>Nombre</th>
+        <th>Páginas</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Sede</th>
+        <th>Tercero</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let archivo of archivos" style="cursor: pointer;">
+        <td>{{archivo.archivo_id}}</td>
+        <td>{{archivo.nombre}}</td>
+        <td>{{archivo.paginas}}</td>
+        <td>{{archivo.usuario_id}}</td>
+        <td>{{archivo.fecha_registro.date|date:'dd/MM/y hh:mm:ss'}}</td>
+        <td>{{archivo.sede}}</td>
+        <td>{{archivo.tercero}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

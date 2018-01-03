@@ -32,11 +32,41 @@
             {{environment.appnamesmall}}
           </div>
         </li>
-        <li>
+        <li routerLinkActive="active">
           <a routerLink="escritorio">
             <i class="fa fa-home"></i>
             <span class="nav-label">Inicio</span>
           </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-edit"></i>
+            <span class="nav-label">Archivos</span>
+            <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse">
+            <li routerLinkActive="active">
+              <a routerLink="archivo/listado">Listado</a>
+            </li>
+            <li>
+              <a routerLink="archivo/cargar">Subir archivos</a>
+            </li>
+            <li>
+              <a href="form_wizard.html">Wizard</a>
+            </li>
+            <li>
+              <a href="form_file_upload.html">File Upload</a>
+            </li>
+            <li>
+              <a href="form_editors.html">Text Editor</a>
+            </li>
+            <li>
+              <a href="form_autocomplete.html">Autocomplete</a>
+            </li>
+            <li>
+              <a href="form_markdown.html">Markdown</a>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="#">
@@ -46,7 +76,7 @@
           </a>
           <ul class="nav nav-second-level collapse">
             <li>
-              <a routerLink="terceros" >Terceros</a>
+              <a routerLink="terceros">Terceros</a>
             </li>
             <li>
               <a href="graph_morris.html">Sedes</a>
@@ -71,70 +101,8 @@
             </li>
           </ul>
         </li>
+
         <li>
-          <a href="mailbox.html">
-            <i class="fa fa-envelope"></i>
-            <span class="nav-label">Mailbox </span>
-            <span class="label label-warning pull-right">16/24</span>
-          </a>
-          <ul class="nav nav-second-level collapse">
-            <li>
-              <a href="mailbox.html">Inbox</a>
-            </li>
-            <li>
-              <a href="mail_detail.html">Email view</a>
-            </li>
-            <li>
-              <a href="mail_compose.html">Compose email</a>
-            </li>
-            <li>
-              <a href="email_template.html">Email templates</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="metrics.html">
-            <i class="fa fa-pie-chart"></i>
-            <span class="nav-label">Metrics</span>
-          </a>
-        </li>
-        <li>
-          <a href="widgets.html">
-            <i class="fa fa-flask"></i>
-            <span class="nav-label">Widgets</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-edit"></i>
-            <span class="nav-label">Forms</span>
-            <span class="fa arrow"></span>
-          </a>
-          <ul class="nav nav-second-level collapse">
-            <li>
-              <a href="form_basic.html">Basic form</a>
-            </li>
-            <li>
-              <a href="form_advanced.html">Advanced Plugins</a>
-            </li>
-            <li>
-              <a href="form_wizard.html">Wizard</a>
-            </li>
-            <li>
-              <a href="form_file_upload.html">File Upload</a>
-            </li>
-            <li>
-              <a href="form_editors.html">Text Editor</a>
-            </li>
-            <li>
-              <a href="form_autocomplete.html">Autocomplete</a>
-            </li>
-            <li>
-              <a href="form_markdown.html">Markdown</a>
-            </li>
-          </ul>
-        </li>
-        <li class="active">
           <a href="#">
             <i class="fa fa-desktop"></i>
             <span class="nav-label">App Views</span>
@@ -670,11 +638,11 @@
       <div class="full-height">
         <div class="full-height-scroll white-bg border-left">
 
-          <div class="wrapper wrapper-content animated fadeInRightBig">
+          <!-- <div class="wrapper wrapper-content animated fadeInRightBig"> -->
             <!-- <div class="middle-box text-center animated fadeInRightBig"> -->
             <router-outlet></router-outlet>
             <!-- </div> -->
-          </div>
+          <!-- </div> -->
 
 
         </div>
