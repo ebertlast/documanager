@@ -4,7 +4,10 @@ import { ArchivoService } from '../../servicios/archivo.service';
 import { Archivo } from '../../modelos/archivo';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
+import { PagerService } from '../../../generico/servicios/pager.service';
 declare var PDFJS: any;
+declare var animationHover: any;
+// declare var elevateZoom: any;
 @Component({
   selector: 'app-archivo',
   templateUrl: './archivo.component.html',
@@ -12,6 +15,10 @@ declare var PDFJS: any;
 })
 export class ArchivoComponent implements OnInit, OnDestroy {
   private sub: any;
+  public pager: any = {};
+  public allItems: string[] = [];
+  public pagedItems: string[] = [];
+  // #region Intento de hacer algo con PDF.js
   public url = '';
   public pdfDoc = null;
   public pageNum = 1;
@@ -19,13 +26,15 @@ export class ArchivoComponent implements OnInit, OnDestroy {
   public pageNumPending = null;
   public scale = 1.5;
   public zoomRange = 0.25;
-  public canvas: any = null; // $('#the-canvas')[0]; // <HTMLElement>document.getElementById('the-canvas');
-  public ctx = null; // this.canvas.getContext('2d');
+  public canvas: any = null;
+  public ctx = null;
+  // #endregion
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _archivoService: ArchivoService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _pagerService: PagerService,
   ) { }
 
 
@@ -57,33 +66,41 @@ export class ArchivoComponent implements OnInit, OnDestroy {
           me.archivo = archivo;
           console.log(me.archivo);
           me.imagenes = [];
-          me.archivo.paginas = (me.archivo.paginas > 10) ? 10 : me.archivo.paginas;
-          for (let i = 1; i <= me.archivo.paginas; i++) {
+          const paginas = (me.archivo.paginas > 10) ? 10 : me.archivo.paginas;
+          for (let i = 1; i <= paginas; i++) {
             me.imagenes.push(me.archivo.directorio + '/' + i + '.jpg');
           }
 
 
+          for (let i = 1; i <= me.archivo.paginas; i++) {
+            this.allItems.push(me.archivo.directorio + '/' + i + '.jpg');
+          }
+
+          this.set_page(1);
+
+
           // #region desplegar el PDF
-          me.url = me.archivo.directorio + '/' + me.archivo.nombre;
-          // me.url = 'c:/Users/Lenovo/Downloads/Prueba/Psico-Cibernética (Maxwell Maltz).pdf';
-          console.log(me.url);
-          me.canvas = $('#the-canvas')[0]; // <HTMLElement>document.getElementById('the-canvas');
-          me.ctx = me.canvas.getContext('2d');
-          document.getElementById('prev').addEventListener('click', me.onPrevPage);
-          document.getElementById('next').addEventListener('click', me.onNextPage);
-          document.getElementById('zoomin').addEventListener('click', me.onZoomIn);
-          document.getElementById('zoomout').addEventListener('click', me.onZoomOut);
-          document.getElementById('zoomfit').addEventListener('click', me.onZoomFit);
-          /**
-           * Asynchronously downloads PDF.
-           */
-          // PDFJS.getDocument({
-          //   'url': me.url,
-          //   httpHeaders: { Authorization: `Bearer ${me._authService.Usuario().token}` },
-          //   withCredentials: true,
-          // })
+
           const pasar = false;
           if (pasar) {
+            me.url = me.archivo.directorio + '/' + me.archivo.nombre;
+            // me.url = 'c:/Users/Lenovo/Downloads/Prueba/Psico-Cibernética (Maxwell Maltz).pdf';
+            console.log(me.url);
+            me.canvas = $('#the-canvas')[0]; // <HTMLElement>document.getElementById('the-canvas');
+            me.ctx = me.canvas.getContext('2d');
+            document.getElementById('prev').addEventListener('click', me.onPrevPage);
+            document.getElementById('next').addEventListener('click', me.onNextPage);
+            document.getElementById('zoomin').addEventListener('click', me.onZoomIn);
+            document.getElementById('zoomout').addEventListener('click', me.onZoomOut);
+            document.getElementById('zoomfit').addEventListener('click', me.onZoomFit);
+            /**
+             * Asynchronously downloads PDF.
+             */
+            // PDFJS.getDocument({
+            //   'url': me.url,
+            //   httpHeaders: { Authorization: `Bearer ${me._authService.Usuario().token}` },
+            //   withCredentials: true,
+            // })
             PDFJS.getDocument(me.url)
               .then(function (pdfDoc_) {
                 me.pdfDoc = pdfDoc_;
@@ -101,16 +118,28 @@ export class ArchivoComponent implements OnInit, OnDestroy {
                 // Initial/first page rendering
                 me.renderPage(me.pageNum, me.scale);
               });
-          }
 
-          // this.renderPage(1, 100);
+            // this.renderPage(1, 100);
+          }
 
           // #endregion
         });
       });
     });
 
+    $('.file-box').each(function () {
+      animationHover(this, 'pulse');
+    });
 
+    const img: any = $('img');
+    // img.each(function () {
+    //   animationHover(this, 'pulse');
+    // });
+    img.elevateZoom({
+      zoomType: 'lens',
+      lensShape: 'round',
+      lensSize: 200
+    });
 
   }
 
@@ -239,6 +268,29 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     const win = window.open();
     win.document.write('<iframe width="100%" height="100%" src="' + source + '" frameborder="0" allowfullscreen></iframe>');
     return false;
+  }
+
+  public set_page(page: number) {
+    console.log('Page:' + page + ', this.allItems.length:' + this.allItems.length);
+    if (page < 1) {
+      // if (page < 1 || page > this.pager.totalPages) {
+      // console.log('Página: '+page.toString()+', Total Páginas: '+this.pager.totalPages);
+      return;
+    }
+    if (page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this._pagerService.getPager(this.allItems.length, page, 6);
+    // console.log(this.pager.startIndex);
+    this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    console.log(this.pagedItems);
+  }
+
+  public getImagen(page: number) {
+    const imagen = this.pagedItems[page];
+    console.log(imagen);
+    return imagen;
+
   }
 
 }

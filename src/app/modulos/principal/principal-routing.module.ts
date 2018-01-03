@@ -7,6 +7,7 @@ import { PerfilComponent } from '../seguridad/componentes/perfil/perfil.componen
 import { TercerosComponent } from '../generico/componentes/terceros/terceros.component';
 import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.component';
 import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.component';
+import { LotesComponent } from '../archivo/componentes/lotes/lotes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'escritorio', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'archivo/cargar', component: ArchivoCargarComponent, canActivate: [AuthGuard] },
       { path: 'archivo/listado', component: ArchivosComponent, canActivate: [AuthGuard] },
       { path: 'archivo/:archivo_id', component: ArchivoComponent, canActivate: [AuthGuard] },
+      { path: 'archivo/lotes', component: LotesComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'archivo/cargar' }

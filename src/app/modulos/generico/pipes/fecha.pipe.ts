@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FechaPipe implements PipeTransform {
 
   transform(value: any): string {
+    if (!value) { return ''; }
     if (value.date) { value = value.date; }
     const meses = new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');

@@ -9,6 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { GenericoModule } from '../generico/generico.module';
 import { ArchivoComponent } from './componentes/archivo/archivo.component';
 import { Archivo } from './modelos/archivo';
+import { LotesComponent } from './componentes/lotes/lotes.component';
 
 @NgModule({
   imports: [
@@ -18,9 +19,9 @@ import { Archivo } from './modelos/archivo';
     GenericoModule
   ],
   exports: [
-    ArchivoCargarComponent, ArchivosComponent, ArchivoComponent
+    ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent
   ],
-  declarations: [ArchivoCargarComponent, ArchivosComponent, ArchivoComponent],
+  declarations: [ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent],
   providers: [ArchivoService]
 })
 export class ArchivoModule { }
