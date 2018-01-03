@@ -6,15 +6,17 @@ import { FiltrarPipe } from './pipes/filtrar.pipe';
 import { SafePipe } from './pipes/safe.pipe';
 import { TercerosComponent } from './componentes/terceros/terceros.component';
 import { PagerService } from './servicios/pager.service';
+import { TablasComponent } from './componentes/tablas/tablas.component';
+import { TablaGenericaService } from './servicios/tabla-generica.service';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent
+    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent
   ],
-  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent],
-  providers: [PagerService]
+  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent],
+  providers: [PagerService, TablaGenericaService]
 })
 export class GenericoModule { }

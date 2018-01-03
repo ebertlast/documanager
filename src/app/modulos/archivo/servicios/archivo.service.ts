@@ -75,4 +75,22 @@ export class ArchivoService {
       .catch(err => this._authService.CapturarError(err));
   }
 
+  public registrosPorLote(lote_id): Observable<Model[]> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/archivos/lote/' + lote_id;
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        const archivos: Model[] = [];
+        data.forEach(archivo => {
+          const modelo: Model = archivo;
+          modelo.directorio = environment.urlFilesUploads + modelo.directorio.replace('.', '');
+          archivos.push(archivo);
+        });
+        return archivos;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
 }

@@ -11,6 +11,8 @@ import { ArchivoComponent } from './componentes/archivo/archivo.component';
 import { Archivo } from './modelos/archivo';
 import { LotesComponent } from './componentes/lotes/lotes.component';
 import { ImageZoomModule } from 'angular2-image-zoom';
+import { LoteService } from './servicios/lote.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,12 +20,13 @@ import { ImageZoomModule } from 'angular2-image-zoom';
     ArchivoRoutingModule,
     DataTablesModule,
     GenericoModule,
-    ImageZoomModule
+    ImageZoomModule,
+    FormsModule
   ],
   exports: [
     ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent
   ],
   declarations: [ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent],
-  providers: [ArchivoService]
+  providers: [ArchivoService, LoteService]
 })
 export class ArchivoModule { }

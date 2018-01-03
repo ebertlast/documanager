@@ -67,7 +67,7 @@ export class ArchivoCargarComponent implements OnInit {
             'Archivos registrados',
             'Archivos subidos y respaldados, debe ahora editar sus propiedades'
           ).then(() => {
-            me._router.navigate(['escritorio/escritorio/archivo/listado']);
+            me._router.navigate(['escritorio/escritorio/archivos/lotes']);
           });
         } else {
           me._helper.Prompt(

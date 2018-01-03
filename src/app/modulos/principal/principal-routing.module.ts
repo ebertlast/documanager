@@ -14,14 +14,14 @@ const routes: Routes = [
   {
     path: 'escritorio', component: EscritorioComponent, canActivate: [AuthGuard], children: [
       // { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] }
-      { path: '', redirectTo: 'archivo/cargar', pathMatch: 'full' },
-      { path: 'archivo/cargar', component: ArchivoCargarComponent, canActivate: [AuthGuard] },
-      { path: 'archivo/listado', component: ArchivosComponent, canActivate: [AuthGuard] },
+      { path: '', redirectTo: 'archivos/listado', pathMatch: 'full' },
+      { path: 'archivos/cargar', component: ArchivoCargarComponent, canActivate: [AuthGuard] },
+      { path: 'archivos/listado', component: ArchivosComponent, canActivate: [AuthGuard] },
       { path: 'archivo/:archivo_id', component: ArchivoComponent, canActivate: [AuthGuard] },
-      { path: 'archivo/lotes', component: LotesComponent, canActivate: [AuthGuard] },
+      { path: 'archivos/lotes', component: LotesComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
-      { path: '**', redirectTo: 'archivo/cargar' }
+      { path: '**', redirectTo: 'archivos/listado' }
     ],
   },
   { path: '**', redirectTo: 'escritorio' }

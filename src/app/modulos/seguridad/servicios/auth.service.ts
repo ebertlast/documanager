@@ -31,7 +31,7 @@ export class AuthService {
    * @param mostrarError Muestra al usuario o no lo que contiene el campo 'error' en el response.
    */
   public ExtraerResultados(res: Response, mostrarError: boolean = true) {
-    console.log(res);
+    // console.log(res);
     const body = res.json();
     if (!body.response && body.message && mostrarError) {
       this._helper.Notificacion(body.message || body.statusText, '', 'warning');
