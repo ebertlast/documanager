@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       }
     });
 
-    console.log('AuthGuard:', _url);
+    // console.log('AuthGuard:', _url);
     let supervisar = true;
     switch (_url) {
       case 'ingresar':

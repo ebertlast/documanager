@@ -51,7 +51,7 @@ export class ArchivoCargarComponent implements OnInit {
 
   cargarArchivos2() {
     const me = this;
-    me._router.navigate(['escritorio/escritorio/archivo/listado']);
+    me._router.navigate(['escritorio/./archivo/listado']);
 
   }
   cargarArchivos() {
@@ -67,7 +67,7 @@ export class ArchivoCargarComponent implements OnInit {
             'Archivos registrados',
             'Archivos subidos y respaldados, debe ahora editar sus propiedades'
           ).then(() => {
-            me._router.navigate(['escritorio/escritorio/archivos/lotes']);
+            me._router.navigate(['escritorio/./archivos/lotes']);
           });
         } else {
           me._helper.Prompt(

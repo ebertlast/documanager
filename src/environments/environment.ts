@@ -8,7 +8,7 @@ export const environment = {
   appname: 'DocuManager',
   appnamesmall: 'DM+',
   version: '1.0',
-  companyname: 'Rendimos LTDA',
+  companyname: 'Rendimos, LTDA',
   yearscopyrigth: '2017-2018',
   currentuser: 'documanagerwebuser',
   dbconsultas: 'DMConsultas',
@@ -16,5 +16,5 @@ export const environment = {
   urlFilesUploads: 'http://localhost:8082/documanager.api/public',
   urlFilesDownload: 'http://localhost:8082/documanager.api/public',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
-  urltwitter: 'https://twitter.com/ebertzerpa'
+  urltwitter: 'https://twitter.com/ebertzerpa',
 };

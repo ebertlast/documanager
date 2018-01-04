@@ -38,11 +38,33 @@ export class TablaGenericaService {
       })
       .catch(err => this._authService.CapturarError(err));
   }
+  public solo_tablas(): Observable<string[]> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/tablas/solotablas';
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
   public campos(tabla: string, campo: string = ''): Observable<Model[]> {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/tablas/campos/' + tabla + '/' + campo;
     // console.log(_url);
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+  public solo_campos(tabla: string): Observable<string[]> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/tablas/solocampos/' + tabla;
     return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
@@ -61,12 +83,24 @@ export class TablaGenericaService {
       })
       .catch(err => this._authService.CapturarError(err));
   }
+  public solo_codigos(tabla: string, campo: string): Observable<string[]> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/tablas/solocodigos/' + tabla + '/' + campo;
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
   public eliminarRegistro(tabla: string, campo: string, codigo: string): Observable<boolean> {
     const _headers = new Headers({
       'Authorization': 'Bearer ' + this._authService.Usuario().token
     });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/tablas/' + tabla + '/' + campo + '/' + codigo;
+    console.log(_url);
     return this._http.delete(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
@@ -82,6 +116,8 @@ export class TablaGenericaService {
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
     const _url = environment.apiurl + '/tablas/actualizar';
+    console.log(_json);
+    console.log(_url);
     return this._http.post(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

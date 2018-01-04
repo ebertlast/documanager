@@ -98,6 +98,14 @@ export class Helper {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
+  /**
+   * Despliega un prompt para preguntar al usuario o para esperar una respuesta por parte de el. Ejemplo:
+   * me._helper.Prompt(titulo,cuerpo).then((result) => { if (result.value) {} else if (result.dismiss === 'cancel') {} });
+   * result.dismiss can be 'cancel', 'overlay', 'close', and 'timer'
+   * @param _title Título del prompt
+   * @param _text Cuerpo del Prompt
+   * @param _type Por defecto (success) pueden ser: success, warning, error
+   */
   public Prompt(_title: string, _text: string, _type = 'success'): Promise<any> {
     if (_type === 'warning') {
       return swal({

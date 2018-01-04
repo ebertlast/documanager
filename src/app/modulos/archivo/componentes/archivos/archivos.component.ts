@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { Helper } from '../../../../app-helper';
@@ -101,7 +101,7 @@ export class ArchivosComponent implements OnInit {
   someClickHandler(_archivo: any): void {
     const archivo_id = _archivo[0];
     if (archivo_id === '') { return; }
-    this._router.navigate(['escritorio/escritorio/archivo', archivo_id]);
+    this._router.navigate(['escritorio/./archivo', archivo_id]);
     // this.cargando = true;
     // this._archivoService.registros(archivo_id).subscribe(archivos => {
     //   this.cargando=false;

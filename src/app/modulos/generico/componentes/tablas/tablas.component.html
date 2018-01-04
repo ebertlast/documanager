@@ -1,3 +1,94 @@
-<p>
-  tablas works!
-</p>
+<div class="row">
+  <div class="col-lg-5">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title hide">
+        <h5>Chosen select
+          <small>http://harvesthq.github.io/chosen/</small>
+        </h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <input title="Tabla" type="text" placeholder="tabla..." name="tabla" id="tabla" class="typeahead_1 form-control" (change)="refrescar_campos()"
+          [(ngModel)]="tgen.tabla" [disabled]="editar">
+        <input title="Campo" type="text" placeholder="campo..." name="campo" id="campo" class="typeahead_1 form-control" (change)="refrescar_codigos()"
+          [(ngModel)]="tgen.campo" [disabled]="editar">
+        <input title="Código" type="text" placeholder="codigo..." name="codigo" id="codigo" class="typeahead_1 form-control" [(ngModel)]="tgen.codigo"
+          [disabled]="editar">
+        <input title="Dato" type="text" placeholder="dato..." name="dato" id="dato" class="form-control" [(ngModel)]="tgen.dato">
+        <input title="Cantidad" type="number" placeholder="CANTIDAD..." name="cantidad" id="cantidad" class="form-control" [(ngModel)]="tgen.cantidad">
+        <input title="Valor" type="number" placeholder="VALOR..." name="valor" id="valor" class="form-control" [(ngModel)]="tgen.valor">
+        <input title="Observación" type="text" placeholder="observacion..." name="observacion" id="observacion" class="form-control"
+          [(ngModel)]="tgen.observacion">
+        <select class="form-control" placeholder="TIPO" name="tipo" id="tipo" [(ngModel)]="tgen.tipo">
+          <option value="" selected="selected">Elije un tipo</option>
+          <option value="VARCHAR">Alfanumérico</option>
+          <option value="DECIMAL">Decimal</option>
+          <option value="DATETIME">Fecha</option>
+          <option value="INT">Entero</option>
+        </select>
+
+        <button class="btn btn-info btn-circle btn-lg" title="Aceptar" type="button" (click)="guardar()" [ngClass]="{'hide': tgen.campo===''||tgen.tabla===''||tgen.codigo===''}">
+          <i class="fa fa-check"></i>
+        </button>
+        <button class="btn btn-warning btn-circle btn-lg" title="Cancelar" type="button" [ngClass]="{'hide': !editar}" (click)="cancelar()">
+          <i class="fa fa-times"></i>
+        </button>
+        <button class="btn btn-danger btn-circle btn-lg" title="Borrar" type="button" [ngClass]="{'hide': !editar}" (click)="borrar()">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-5" [ngClass]="{'hide': tgens.length<=0}">
+    <div class="ibox float-e-margins">
+      <div class="ibox-content">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th>Tabla</th>
+              <th>Campo</th>
+              <th>Codigo</th>
+              <th>Tipo</th>
+              <th>Dato</th>
+              <th>Cantidad</th>
+              <th>Valor</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of tgens" style="cursor: pointer;">
+              <td>{{t.tabla}}</td>
+              <td>{{t.campo}}</td>
+              <td>{{t.codigo}}</td>
+              <td>{{t.tipo}}</td>
+              <td>{{t.dato}}</td>
+              <td>{{t.cantidad}}</td>
+              <td>{{t.valor}}</td>
+              <td>{{t.observacion}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

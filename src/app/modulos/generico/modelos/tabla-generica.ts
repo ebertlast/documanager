@@ -6,7 +6,8 @@ export class TablaGenerica {
     public dato: string = '',
     public cantidad: number = 0,
     public valor: number = 0,
-    public fecha: Date = null,
     public observacion: string = '',
+    public grupo_id: string = '',
+    public tipo: string = '',
   ) { }
 }

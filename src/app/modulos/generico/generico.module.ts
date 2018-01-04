@@ -10,15 +10,20 @@ import { TablasComponent } from './componentes/tablas/tablas.component';
 import { TablaGenericaService } from './servicios/tabla-generica.service';
 import { TerceroService } from './servicios/tercero.service';
 import { SedeService } from './servicios/sede.service';
+import { FormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
+import { FechacortaPipe } from './pipes/fechacorta.pipe';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    DataTablesModule
   ],
   exports: [
     CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent
   ],
-  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent],
+  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, FechacortaPipe],
   providers: [PagerService, TablaGenericaService, TerceroService, SedeService]
 })
 export class GenericoModule { }

@@ -34,9 +34,6 @@ export class EscritorioComponent implements OnInit {
     cargarInspinia();
   }
 
-  public set_links(links): void {
-    console.log(links);
-  }
   public component_added(event) {
     // console.log(event);
     this.componente_actual = event.constructor.name;
@@ -91,6 +88,14 @@ export class EscritorioComponent implements OnInit {
         break;
       case 'SedesComponent':
         this.title = 'Sedes de terceros';
+        break;
+      case 'TablasComponent':
+        this.title = 'Tablas genéricas';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Tablas Genéricas', active: true },
+        ];
         break;
       default:
         this.title = 'Escritorio';

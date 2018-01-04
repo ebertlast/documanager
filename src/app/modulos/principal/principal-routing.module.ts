@@ -8,11 +8,12 @@ import { TercerosComponent } from '../generico/componentes/terceros/terceros.com
 import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.component';
 import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.component';
 import { LotesComponent } from '../archivo/componentes/lotes/lotes.component';
+import { TablasComponent } from '../generico/componentes/tablas/tablas.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'escritorio', pathMatch: 'full' },
+  { path: '', redirectTo: '.', pathMatch: 'full' },
   {
-    path: 'escritorio', component: EscritorioComponent, canActivate: [AuthGuard], children: [
+    path: '.', component: EscritorioComponent, canActivate: [AuthGuard], children: [
       // { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] }
       { path: '', redirectTo: 'archivos/listado', pathMatch: 'full' },
       { path: 'archivos/cargar', component: ArchivoCargarComponent, canActivate: [AuthGuard] },
@@ -21,10 +22,11 @@ const routes: Routes = [
       { path: 'archivos/lotes', component: LotesComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
+      { path: 'tablas', component: TablasComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'archivos/listado' }
     ],
   },
-  { path: '**', redirectTo: 'escritorio' }
+  { path: '**', redirectTo: '.' }
 ];
 
 @NgModule({

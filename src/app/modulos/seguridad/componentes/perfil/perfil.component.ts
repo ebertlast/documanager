@@ -87,31 +87,31 @@ export class PerfilComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           me.cargando = true;
-          me._helper.Sleep(1500).then(() => {
-            me._usuarioService.cambiar_clave(me.usuario, me.claveactual).subscribe(exito => {
+          // me._helper.Sleep(1500).then(() => {
+          // });
+          me._usuarioService.cambiar_clave(me.usuario, me.claveactual).subscribe(exito => {
+            me.cargando = false;
+            if (exito === true) {
+              me._helper.Prompt(
+                'Contraseña actualizada',
+                'Tu contraseña ha cambiado, debes iniciar sesión nuevamente.',
+                'success'
+              ).then((result2) => {
+                me._router.navigate(['/seguridad/ingresar']);
+              });
+            } else {
               me.cargando = false;
-              if (exito === true) {
-                me._helper.Prompt(
-                  'Contraseña actualizada',
-                  'Tu contraseña ha cambiado, debes iniciar sesión nuevamente.',
-                  'success'
-                ).then((result2) => {
-                  me._router.navigate(['/seguridad/ingresar']);
-                });
-              } else {
-                me.cargando = false;
-                $('#claveactual').focus();
-                me._helper.AnimarDiv('formulario');
-                // me._helper.Prompt(
-                //   'Contraseña no actualizada',
-                //   `Ha ocurrido un evento inesperado mientras intentamos actualizar su contraseña, vuelve a intentarlo.
-                //   Si el problema persiste no dudes en contactar al personal de tecnología.`,
-                //   'error'
-                // );
-              }
-            });
-
+              $('#claveactual').focus();
+              me._helper.AnimarDiv('formulario');
+              // me._helper.Prompt(
+              //   'Contraseña no actualizada',
+              //   `Ha ocurrido un evento inesperado mientras intentamos actualizar su contraseña, vuelve a intentarlo.
+              //   Si el problema persiste no dudes en contactar al personal de tecnología.`,
+              //   'error'
+              // );
+            }
           });
+
           // result.dismiss can be 'cancel', 'overlay',
           // 'close', and 'timer'
         } else if (result.dismiss === 'cancel') {

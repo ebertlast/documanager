@@ -229,7 +229,7 @@ export class LotesComponent implements OnInit {
       'Los archivos fueron etiquetados y clasificados correctamente.',
       'success'
     ).then((result2) => {
-      me._router.navigate(['escritorio/escritorio/archivos/cargar']);
+      me._router.navigate(['escritorio/./archivos/cargar']);
     });
   }
 
