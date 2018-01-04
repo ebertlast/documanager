@@ -25,7 +25,7 @@ export class Helper {
       'closeButton': true,
       'debug': false,
       'progressBar': true,
-      'preventDuplicates': false,
+      'preventDuplicates': true,
       'positionClass': 'toast-top-right',
       'onclick': null,
       'showDuration': '400',

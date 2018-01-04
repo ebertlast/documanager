@@ -1,4 +1,52 @@
 <div class="wrapper wrapper-content animated fadeInRightBig">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Consulta de archivos
+            <small>Determine los filtros previos.</small>
+          </h5>
+
+        </div>
+        <div class="ibox-content">
+          <form method="get" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Tercero</label>
+
+              <div class="col-sm-10">
+                <select class="form-control m-b" name="tercero" id="tercero" [(ngModel)]="tercero" (change)="refrescar_sedes()">
+                  <option [ngValue]="tercero" *ngFor="let tercero of terceros">
+                    {{tercero.razon_social}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"  [ngClass]="{'hide': tercero.identificacion===''}"></div>
+            <div class="form-group" [ngClass]="{'hide': tercero.identificacion===''}">
+                <label class="col-sm-2 control-label">Sede</label>
+
+                <div class="col-sm-10">
+                  <select class="form-control m-b" name="sede" id="sede" [(ngModel)]="sede">
+                    <option [ngValue]="sede" *ngFor="let sede of sedes">
+                      {{sede.razon_social}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group hide">
+              <div class="col-sm-4 col-sm-offset-2">
+                <button class="btn btn-white" type="submit">Cancel</button>
+                <button class="btn btn-primary" type="submit">Save changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead>
       <tr>

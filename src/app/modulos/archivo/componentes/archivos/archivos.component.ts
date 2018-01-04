@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Subject';
 import { Helper } from '../../../../app-helper';
 import { ArchivoService } from '../../servicios/archivo.service';
 import { Archivo } from '../../modelos/archivo';
 import { Router } from '@angular/router';
-
+import { Tercero } from '../../../generico/modelos/tercero';
+import { TerceroService } from '../../../generico/servicios/tercero.service';
+import { Sede } from '../../../generico/modelos/sede';
+import { SedeService } from '../../../generico/servicios/sede.service';
+import { TablaGenerica } from '../../../generico/modelos/tabla-generica';
 @Component({
   selector: 'app-archivos',
   templateUrl: './archivos.component.html',
@@ -16,7 +20,9 @@ export class ArchivosComponent implements OnInit {
   constructor(
     private _helper: Helper,
     private _archivoService: ArchivoService,
-    private _router: Router
+    private _router: Router,
+    private _terceroService: TerceroService,
+    private _sedeService: SedeService,
   ) { }
 
 
@@ -28,6 +34,57 @@ export class ArchivosComponent implements OnInit {
   public set archivos(v: Archivo[]) {
     this._archivos = v;
   }
+
+  private _terceros: Tercero[] = [];
+  public get terceros(): Tercero[] {
+    return this._terceros;
+  }
+  public set terceros(v: Tercero[]) {
+    this._terceros = v;
+  }
+
+  private _tercero: Tercero = new Tercero();
+  public get tercero(): Tercero {
+    return this._tercero;
+  }
+  public set tercero(v: Tercero) {
+    this._tercero = v;
+  }
+
+  private _sedes: Sede[] = [];
+  public get sedes(): Sede[] {
+    return this._sedes;
+  }
+  public set sedes(v: Sede[]) {
+    this._sedes = v;
+  }
+
+  private _sede: Sede = new Sede();
+  public get sede(): Sede {
+    return this._sede;
+  }
+  public set sede(v: Sede) {
+    this._sede = v;
+  }
+
+  private _clasificaciones: TablaGenerica[] = [];
+  public get clasificaciones(): TablaGenerica[] {
+    return this._clasificaciones;
+  }
+  public set clasificaciones(v: TablaGenerica[]) {
+    this._clasificaciones = v;
+  }
+
+  private _etiquetas: TablaGenerica[] = [];
+  public get etiquetas(): TablaGenerica[] {
+    return this._etiquetas;
+  }
+  public set etiquetas(v: TablaGenerica[]) {
+    this._etiquetas = v;
+  }
+
+
+
 
   // #endregion
 
@@ -132,15 +189,22 @@ export class ArchivosComponent implements OnInit {
       // ]
     };
 
-    this.refrescarArchivos();
+    this.refrescar_archivos();
+
+    this._terceroService.registros().subscribe(terceros => {
+      this.terceros = terceros;
+      // console.log(this.terceros);
+    });
+
   }
 
 
-  refrescarArchivos() {
+
+  refrescar_archivos() {
     this.cargando = true;
     this._archivoService.registros().subscribe(archivos => {
       this.archivos = archivos;
-      console.log(this.archivos);
+      // console.log(this.archivos);
       if (this.aux === 0) {
         this.aux++;
         this.dtTrigger.next();
@@ -148,6 +212,16 @@ export class ArchivosComponent implements OnInit {
         this.rerender();
       }
       this.cargando = false;
+    });
+  }
+
+  refrescar_sedes() {
+    if (this.tercero.identificacion === '') { return; }
+    this.sedes = [];
+    this.cargando = true;
+    this._sedeService.registros_por_identificacion(this.tercero.tipo_id, this.tercero.identificacion).subscribe(sedes => {
+      this.sedes = sedes;
+      console.log(this.sedes);
     });
   }
 

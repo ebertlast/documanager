@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { Usuario } from '../../../seguridad/modelos/usuario';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
+import { Navlink } from '../../../generico/modelos/navlink';
 declare var $: any;
 declare var cargarInspinia: any;
 @Component({
@@ -11,6 +12,9 @@ declare var cargarInspinia: any;
 })
 export class EscritorioComponent implements OnInit {
   environment = environment;
+  public title = 'Escritorio';
+  public navlinks: Navlink[] = [];
+  private componente_actual = '';
   constructor(
     private _authService: AuthService
   ) { }
@@ -28,5 +32,74 @@ export class EscritorioComponent implements OnInit {
     this.usuario = this._authService.Usuario();
     const me = this;
     cargarInspinia();
+  }
+
+  public set_links(links): void {
+    console.log(links);
+  }
+  public component_added(event) {
+    // console.log(event);
+    this.componente_actual = event.constructor.name;
+    this.actualizar_navegacion();
+  }
+  public component_removed(event) {
+    // console.log(event);
+  }
+
+  actualizar_navegacion() {
+    // console.log(this.componente_actual);
+    this.navlinks = [];
+    switch (this.componente_actual) {
+      case 'ArchivosComponent':
+        this.title = 'Consulta de Archivos';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: '', title: 'Archivos', active: true },
+        ];
+        break;
+      case 'ArchivoCargarComponent':
+        this.title = 'Subir archivos digitalizados';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: 'archivos/listado', title: 'Archivos', active: false },
+          { url: '', title: 'Subir', active: true },
+        ];
+        break;
+      case 'LotesComponent':
+        this.title = 'Lotes de archivos por identificar';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: 'archivos/listado', title: 'Archivos', active: false },
+          { url: '', title: 'Lotes', active: true },
+        ];
+        break;
+      case 'PerfilComponent':
+        this.title = 'Perfil de usuario';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: '', title: 'Seguridad', active: true },
+          { url: '', title: 'Perfil', active: true },
+        ];
+        break;
+      case 'TercerosComponent':
+        this.title = 'Terceros del sistema';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Terceros', active: true },
+        ];
+        break;
+      case 'SedesComponent':
+        this.title = 'Sedes de terceros';
+        break;
+      default:
+        this.title = 'Escritorio';
+    }
+    const links: Navlink[] = [
+      { url: 'archivos', title: 'Archivos', active: false },
+      { url: 'perfiles', title: 'Perfiles', active: false },
+      // { url: 'perfil/' + this.perfil.perfilid, title: 'Perfil ' + this.perfil.denominacion, active: false },
+      { url: '', title: 'Nuevo Perfil', active: true }
+    ];
   }
 }
