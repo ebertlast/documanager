@@ -13,6 +13,7 @@ import { SedeService } from './servicios/sede.service';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { FechacortaPipe } from './pipes/fechacorta.pipe';
+import { SedesComponent } from './componentes/sedes/sedes.component';
 
 @NgModule({
   imports: [
@@ -21,9 +22,9 @@ import { FechacortaPipe } from './pipes/fechacorta.pipe';
     DataTablesModule
   ],
   exports: [
-    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent
+    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, SedesComponent
   ],
-  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, FechacortaPipe],
+  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, FechacortaPipe, SedesComponent],
   providers: [PagerService, TablaGenericaService, TerceroService, SedeService]
 })
 export class GenericoModule { }

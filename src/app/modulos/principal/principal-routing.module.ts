@@ -9,6 +9,8 @@ import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.comp
 import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.component';
 import { LotesComponent } from '../archivo/componentes/lotes/lotes.component';
 import { TablasComponent } from '../generico/componentes/tablas/tablas.component';
+import { SedesComponent } from '../generico/componentes/sedes/sedes.component';
+import { EtiquetasComponent } from '../archivo/componentes/etiquetas/etiquetas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '.', pathMatch: 'full' },
@@ -20,8 +22,10 @@ const routes: Routes = [
       { path: 'archivos/listado', component: ArchivosComponent, canActivate: [AuthGuard] },
       { path: 'archivo/:archivo_id', component: ArchivoComponent, canActivate: [AuthGuard] },
       { path: 'archivos/lotes', component: LotesComponent, canActivate: [AuthGuard] },
+      { path: 'archivos/etiquetas', component: EtiquetasComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
+      { path: 'sedes', component: SedesComponent, canActivate: [AuthGuard] },
       { path: 'tablas', component: TablasComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'archivos/listado' }
     ],
