@@ -10,16 +10,19 @@ import { GenericoModule } from '../generico/generico.module';
 import { UsuarioService } from './servicios/usuario.service';
 import { GruposComponent } from './grupos/grupos.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { GrupoService } from './servicios/grupo.service';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   imports: [
     CommonModule,
     SeguridadRoutingModule,
     FormsModule,
-    GenericoModule
+    GenericoModule,
+    DataTablesModule
   ],
   exports: [GruposComponent, UsuariosComponent, PerfilComponent],
   declarations: [IngresarComponent, PerfilComponent, GruposComponent, UsuariosComponent],
-  providers: [AuthService, UsuarioService]
+  providers: [AuthService, UsuarioService, GrupoService]
 })
 export class SeguridadModule { }
