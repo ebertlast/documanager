@@ -11,6 +11,8 @@ import { LotesComponent } from '../archivo/componentes/lotes/lotes.component';
 import { TablasComponent } from '../generico/componentes/tablas/tablas.component';
 import { SedesComponent } from '../generico/componentes/sedes/sedes.component';
 import { EtiquetasComponent } from '../archivo/componentes/etiquetas/etiquetas.component';
+import { UsuariosComponent } from '../seguridad/usuarios/usuarios.component';
+import { GruposComponent } from '../seguridad/grupos/grupos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '.', pathMatch: 'full' },
@@ -27,6 +29,8 @@ const routes: Routes = [
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
       { path: 'sedes', component: SedesComponent, canActivate: [AuthGuard] },
       { path: 'tablas', component: TablasComponent, canActivate: [AuthGuard] },
+      { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'archivos/listado' }
     ],
   },

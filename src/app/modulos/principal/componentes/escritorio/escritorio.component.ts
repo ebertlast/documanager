@@ -89,7 +89,7 @@ export class EscritorioComponent implements OnInit {
       case 'SedesComponent':
         this.title = 'Sedes de terceros';
         break;
-        case 'TablasComponent':
+      case 'TablasComponent':
         this.title = 'Tablas genéricas';
         this.navlinks = [
           { url: 'escritorio', title: 'Inicio', active: false },
@@ -97,12 +97,28 @@ export class EscritorioComponent implements OnInit {
           { url: '', title: 'Tablas Genéricas', active: true },
         ];
         break;
-        case 'EtiquetasComponent':
+      case 'EtiquetasComponent':
         this.title = 'Etiquetas';
         this.navlinks = [
           { url: 'escritorio', title: 'Inicio', active: false },
           { url: 'archivos/listado', title: 'Archivos', active: false },
           { url: '', title: 'Etiquetas', active: true },
+        ];
+        break;
+      case 'UsuariosComponent':
+        this.title = 'Usuarios';
+        this.navlinks = [
+          { url: '', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Usuarios', active: true },
+        ];
+        break;
+      case 'GruposComponent':
+        this.title = 'Grupos';
+        this.navlinks = [
+          { url: '', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Grupos', active: true },
         ];
         break;
       default:

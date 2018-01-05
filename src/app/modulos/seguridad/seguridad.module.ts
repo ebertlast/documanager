@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { GenericoModule } from '../generico/generico.module';
 import { UsuarioService } from './servicios/usuario.service';
+import { GruposComponent } from './grupos/grupos.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { UsuarioService } from './servicios/usuario.service';
     FormsModule,
     GenericoModule
   ],
-  declarations: [IngresarComponent, PerfilComponent],
+  exports: [GruposComponent, UsuariosComponent, PerfilComponent],
+  declarations: [IngresarComponent, PerfilComponent, GruposComponent, UsuariosComponent],
   providers: [AuthService, UsuarioService]
 })
 export class SeguridadModule { }
