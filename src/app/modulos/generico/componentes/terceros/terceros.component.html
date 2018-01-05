@@ -1,3 +1,125 @@
-<p>
-  terceros works!
-</p>
+<div class="row">
+  <!-- Formulario -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Personas, Empresas, Departamentos y otros</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle hide" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link hide">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <div role="form" class="form-inline">
+          <div class="form-group">
+            <label for="tipo_id" class="sr-only">Tipo Identificación</label>
+            <select name="tipo_id" id="tipo_id" [(ngModel)]="tercero.tipo_id" class="form-control input-md" title="Tipo Identificación"
+              placeholder="Tipo Identificación" [disabled]="editar">
+              <option value="{{t.tipo_id}}" *ngFor="let t of tipoDocumentos">{{t.denominacion}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="identificacion" class="sr-only">Identificación</label>
+            <input type="text" placeholder="Identificación" id="identificacion" name="identificacion" title="Identificación" class="form-control input-md"
+              [(ngModel)]="tercero.identificacion" [disabled]="editar">
+          </div>
+          <div class="form-group">
+            <label for="razon_social" class="sr-only">Razón Social</label>
+            <input type="text" placeholder="Razón Social" id="razon_social" name="razon_social" title="Razón Social" class="form-control input-sm"
+              [(ngModel)]="tercero.razon_social">
+          </div>
+          <div class="form-group">
+            <label for="direccion" class="sr-only">Dirección</label>
+            <input type="text" placeholder="Dirección" id="direccion" name="direccion" title="Dirección" class="form-control input-sm"
+              [(ngModel)]="tercero.direccion">
+          </div>
+          <div class="form-group">
+            <label for="email" class="sr-only">Email</label>
+            <input type="text" placeholder="Email" id="email" name="email" title="Email" class="form-control input-sm" [(ngModel)]="tercero.email">
+          </div>
+          <div class="form-group">
+            <label for="telefono" class="sr-only">Teléfono</label>
+            <input type="text" placeholder="Teléfonos" id="telefono" name="telefono" title="Teléfono" class="form-control input-sm" [(ngModel)]="tercero.telefono">
+          </div>
+          <button class="btn btn-primary " type="button" (click)="guardar()">
+            <i class="fa fa-check"></i>&nbsp;Guardar
+          </button>
+          <button class="btn btn-warning " type="button" (click)="cancelar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-times"></i>
+            <span class="bold">Cancelar</span>
+          </button>
+          <button class="btn btn-danger " type="button" (click)="borrar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-trash"></i>&nbsp;&nbsp;
+            <span class="bold">Borrar</span>
+          </button>
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+              <div class="sk-cube"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de Formulario -->
+  <!-- Tabla -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+
+      <div class="ibox-content" style="">
+        <div class="row">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>Tipo Identificación</th>
+                <th>Identificación</th>
+                <th>Razón Social</th>
+                <th>Dirección</th>
+                <th>Email</th>
+                <th>Teléfonos</th>
+                <th>Fecha de Registro</th>
+                <th class="hide">Logo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of terceros" style="cursor: pointer;">
+                <td>{{t.tipo_id}}</td>
+                <td>{{t.identificacion}}</td>
+                <td>{{t.razon_social}}</td>
+                <td>{{t.direccion}}</td>
+                <td>{{t.email}}</td>
+                <td>{{t.telefono}}</td>
+                <td>{{t.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+                <td class="hide">{{t.logo}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de tabla -->
+
+
+</div>

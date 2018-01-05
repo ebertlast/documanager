@@ -4,7 +4,7 @@
  *   version 2.7.1
  *
  */
-$(document).ready(function () { cargarInspinia(); });
+// $(document).ready(function () { cargarInspinia(); });
 
 function cargarInspinia() {
   // Add body-small class if window less than 768px

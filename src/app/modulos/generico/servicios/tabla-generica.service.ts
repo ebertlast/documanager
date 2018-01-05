@@ -116,8 +116,26 @@ export class TablaGenericaService {
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
     const _url = environment.apiurl + '/tablas/actualizar';
-    console.log(_json);
-    console.log(_url);
+    // console.log(_json);
+    // console.log(_url);
+    return this._http.post(_url, _json, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
+  public consultar(model: Model): Observable<Model[]> {
+    const _headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ' + this._authService.Usuario().token
+    });
+    const _options = new RequestOptions({ headers: _headers });
+    const _json = 'json=' + JSON.stringify({ model });
+    const _url = environment.apiurl + '/tablas/consultar';
+    // console.log(_url);
+    // console.log(_json);
     return this._http.post(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

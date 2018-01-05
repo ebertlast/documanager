@@ -9,6 +9,8 @@ export const environment = {
   dbconsultas: 'DMConsultas',
   apiurl: 'http://186.145.16.130:8082/documanager.api/public',
   urlFilesUploads: 'http://186.145.16.130:8082/documanager.api/public',
+  // apiurl: 'http://localhost:8082/documanager.api/public',
+  // urlFilesUploads: 'http://localhost:8082/documanager.api/public',
   urlFilesDownload: 'http://186.145.16.130:8082/documanager.api/public',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
   urltwitter: 'https://twitter.com/ebertzerpa',

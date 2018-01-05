@@ -106,7 +106,7 @@ export class Helper {
    * @param _text Cuerpo del Prompt
    * @param _type Por defecto (success) pueden ser: success, warning, error
    */
-  public Prompt(_title: string, _text: string, _type = 'success'): Promise<any> {
+  public Prompt(_title: string, _text: string = '', _type = 'success'): Promise<any> {
     if (_type === 'warning') {
       return swal({
         title: _title,

@@ -130,9 +130,6 @@ export class TablasComponent implements OnInit {
   public set tipo(v: string) {
     this._tipo = v;
   }
-
-
-
   // #endregion
 
   // #region DataTable
@@ -249,6 +246,7 @@ export class TablasComponent implements OnInit {
         const _campo: any = campo;
         this.campos.push(_campo.campo);
       });
+      // console.log(this.campos);
       const me = this;
       $('#campo').typeahead({
         source: me.campos
@@ -344,6 +342,14 @@ export class TablasComponent implements OnInit {
   }
   guardar() {
     const me = this;
+    me.tgen.tabla = $('#tabla').val();
+    me.tgen.campo = $('#campo').val();
+    me.tgen.codigo = $('#codigo').val();
+    me.tgen.tabla = me.tgen.tabla.toUpperCase();
+    me.tgen.campo = me.tgen.campo.toUpperCase();
+    me.tgen.codigo = me.tgen.codigo.toUpperCase();
+    me.tgen.observacion = me.tgen.observacion.toUpperCase();
+    me.tgen.dato = me.tgen.dato.toUpperCase();
     if (me.tgen.tabla === '') { $('#tabla').focus(); return; }
     if (me.tgen.campo === '') { $('#campo').focus(); return; }
     if (me.tgen.codigo === '') { $('#codigo').focus(); return; }
@@ -357,9 +363,11 @@ export class TablasComponent implements OnInit {
     } else {
       me._tablaGenericaService.nuevoRegistro(this.tgen).subscribe(actualizado => {
         me._helper.Prompt('Registro guardado', 'Registro nuevo guardado en la base de datos');
+        me.refrescar_tablas();
         me.refrescar_codigos();
         me.cancelar();
       });
     }
 
   }
+}
