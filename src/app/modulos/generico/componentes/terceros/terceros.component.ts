@@ -112,7 +112,7 @@ export class TercerosComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   aux = 0;
   someClickHandler(_row: any): void {
-    console.log(_row);
+    // console.log(_row);
     this.tercero = new Tercero();
     this.tercero.tipo_id = _row[0];
     this.tercero.identificacion = _row[1];
@@ -123,7 +123,7 @@ export class TercerosComponent implements OnInit {
     this.tercero.fecha_registro = new Date(Date.parse(_row[6]));
     this.tercero.logo = _row[7];
     this.editar = true;
-    console.log(this.tercero);
+    // console.log(this.tercero);
     // this.refrescar_propiedades();
   }
   // #endregion

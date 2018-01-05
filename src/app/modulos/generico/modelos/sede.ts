@@ -7,5 +7,6 @@ export class Sede {
     public logo: string = '',
     public activa: number = 0,
     public fecha_registro: Date = null,
+    public tercero: string = '',
   ) { }
 }
