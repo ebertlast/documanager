@@ -26,38 +26,38 @@
           </div>
 
           <div class="col-lg-5" [ngClass]="{'hide': etiquetas.length<=0}">
-              <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-                    <thead>
-                      <tr>
-                        <th class="hide">Tabla</th>
-                        <th class="hide">Campo</th>
-                        <th>Codigo Etiqueta</th>
-                        <th class="hide">Tipo</th>
-                        <th>Identificador Archivo</th>
-                        <th>Vinculado</th>
-                        <th class="hide">Valor</th>
-                        <th>Observación</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let t of etiquetas" style="cursor: pointer;">
-                        <td class="hide">{{t.tabla}}</td>
-                        <td class="hide">{{t.campo}}</td>
-                        <td>{{t.codigo}}</td>
-                        <td class="hide">{{t.tipo}}</td>
-                        <td>{{t.dato}}</td>
-                        <td>{{(t.cantidad>0)?'SI':'NO'}}</td>
-                        <td class="hide">{{t.valor}}</td>
-                        <td>{{t.observacion}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <div class="ibox float-e-margins">
+              <div class="ibox-content">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                  <thead>
+                    <tr>
+                      <th class="hide">Tabla</th>
+                      <th class="hide">Campo</th>
+                      <th>Codigo Etiqueta</th>
+                      <th class="hide">Tipo</th>
+                      <th>Identificador Archivo</th>
+                      <th>Vinculado</th>
+                      <th class="hide">Valor</th>
+                      <th>Observación</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let t of etiquetas" style="cursor: pointer;">
+                      <td class="hide">{{t.tabla}}</td>
+                      <td class="hide">{{t.campo}}</td>
+                      <td>{{t.codigo}}</td>
+                      <td class="hide">{{t.tipo}}</td>
+                      <td>{{t.dato}}</td>
+                      <td>{{(t.cantidad>0)?'SI':'NO'}}</td>
+                      <td class="hide">{{t.valor}}</td>
+                      <td>{{t.observacion}}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-
             </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +74,9 @@
                 <strong>
                   {{etiqueta.codigo}}
                 </strong>
+                <a class="btn btn-danger btn-rounded btn-outline" *ngIf="etiqueta_propiedades.length<=0" (click)="eliminar_etiqueta(etiqueta.codigo)">
+                  <i class="fa fa-trash"></i>
+                </a>
 
                 <p>
                   <select name="codigo_propiedad" id="codigo_propiedad" class="form-control" [(ngModel)]="codigo_propiedad">
@@ -81,7 +84,8 @@
                   </select>
                   <input type="text" name="texto_propiedad" id="texto_propiedad" class="form-control" [(ngModel)]="texto_propiedad">
                 </p>
-                <button type="button" class="btn btn-primary btn-sm btn-block" [disabled]="codigo_propiedad==='' || texto_propiedad===''" (click)="agregar_propiedad()">
+                <button type="button" class="btn btn-primary btn-sm btn-block" [disabled]="codigo_propiedad==='' || texto_propiedad===''"
+                  (click)="agregar_propiedad()">
                   <i class="fa fa-plus"></i> Agregar Propiedad
                 </button>
               </div>

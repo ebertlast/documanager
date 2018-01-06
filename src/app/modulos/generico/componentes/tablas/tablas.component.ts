@@ -225,9 +225,12 @@ export class TablasComponent implements OnInit {
     this.campos = [];
     this.campo = '';
     this._tablaGenericaService.solo_tablas().subscribe(tablas => {
+      this.tablas.push('ARCHIVOS');
       tablas.forEach(tabla => {
         const _tabla: any = tabla;
-        this.tablas.push(_tabla.tabla);
+        if (tabla !== 'ARCHIVOS') {
+          this.tablas.push(_tabla.tabla);
+        }
       });
       const me = this;
       $('#tabla').typeahead({
@@ -242,9 +245,15 @@ export class TablasComponent implements OnInit {
     this.codigos = [];
     this.codigo = '';
     this._tablaGenericaService.solo_campos(this.tabla).subscribe(campos => {
+      if (this.tabla === 'ARCHIVOS') {
+        this.campos.push('CLASIFICACION');
+        this.campos.push('PROPIEDAD');
+      }
       campos.forEach(campo => {
         const _campo: any = campo;
-        this.campos.push(_campo.campo);
+        if (this.tabla === 'ARCHIVOS' && _campo !== 'CLASIFICACION' && _campo !== 'PROPIEDAD') {
+          this.campos.push(_campo.campo);
+        }
       });
       // console.log(this.campos);
       const me = this;

@@ -20,6 +20,9 @@ export class TerceroService {
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
     const _url = environment.apiurl + '/terceros/nuevo';
+    // console.log(this._authService.Usuario().token);
+    // console.log(_json);
+    // console.log(_url);
     return this._http.put(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

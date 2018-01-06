@@ -1,3 +1,126 @@
-<p>
-  usuarios works!
-</p>
+<div class="row">
+  <!-- Formulario -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Grupos de usuarios</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle hide" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link hide">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <div role="form" class="form-inline">
+          <div class="form-group">
+            <label for="grupo" class="sr-only">Grupo</label>
+            <select name="grupo" id="grupo" [(ngModel)]="grupo" class="form-control input-sm" title="grupo" placeholder="grupo" [disabled]="editar">
+              <option [ngValue]="grupoVacio" selected="selected">Seleccione un grupo</option>
+              <option [ngValue]="g" *ngFor="let g of grupos">{{g.denominacion}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="usuario_id" class="sr-only">Usuario</label>
+            <input type="text" placeholder="Usuario" id="usuario_id" name="usuario_id" title="Usuario" class="form-control input-sm"
+              [(ngModel)]="usuario.usuario_id" [disabled]="editar">
+          </div>
+          <div class="form-group">
+            <label for="nombres" class="sr-only">Nombres</label>
+            <input type="text" placeholder="Nombres" id="nombres" name="nombres" title="Nombres" class="form-control input-sm" [(ngModel)]="usuario.nombres">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="sr-only">Email</label>
+            <input type="email" placeholder="Email" id="email" name="email" title="Email" class="form-control input-sm" [(ngModel)]="usuario.email">
+          </div>
+
+          <div class="checkbox m-r-xs">
+            <input type="checkbox" id="activo" name="activo" [(ngModel)]="usuario.activo" title="Estado del usuario">
+            <label for="activo">
+              Activo
+            </label>
+          </div>
+
+          <button class="btn btn-primary " type="button" (click)="guardar()">
+            <i class="fa fa-check"></i>&nbsp;Guardar
+          </button>
+          <button class="btn btn-warning " type="button" (click)="cancelar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-times"></i>
+            <span class="bold">Cancelar</span>
+          </button>
+          <button class="btn btn-danger " type="button" (click)="borrar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-trash"></i>&nbsp;&nbsp;
+            <span class="bold">Borrar</span>
+          </button>
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de Formulario -->
+  <!-- Tabla -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+
+      <div class="ibox-content" style="">
+        <div class="row">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th class="">Tipo Identificación</th>
+                <th class="">Identificación</th>
+                <th>Sede</th>
+                <th>Grupo</th>
+                <th>Usuario</th>
+                <th>Nombres</th>
+                <th>Email</th>
+                <th>Activo</th>
+                <th>Fecha Registro</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of usuarios" style="cursor: pointer;">
+                <td class="">{{u.tipo_id}}</td>
+                <td class="">{{u.identificacion}}</td>
+                <td>{{u.sede}}</td>
+                <td>{{u.grupo_id}}</td>
+                <td>{{u.usuario_id}}</td>
+                <td>{{u.nombres}}</td>
+                <td>{{u.email}}</td>
+                <td>{{(u.activo===1)?'SI':'NO'}}</td>
+                <td>{{u.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de tabla -->
+
+
+</div>

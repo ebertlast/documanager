@@ -258,9 +258,9 @@ export class EtiquetasComponent implements OnInit {
     // console.log(tgen);
     me._helper.Prompt('Confirme que desea realmente eliminar la propiedad', '', 'warning').then((result) => {
       if (result.value) {
-        this._tablaGenericaService.eliminarRegistro(tgen.tabla, tgen.campo, tgen.codigo).subscribe(exito => {
+        me._tablaGenericaService.eliminarRegistro(tgen.tabla, tgen.campo, tgen.codigo).subscribe(exito => {
           if (exito) {
-            this.refrescar_propiedades();
+            me.refrescar_propiedades();
             me._helper.Prompt('Propiead de la etiqueta eliminada', '').then(() => {
             });
           } else {
@@ -274,4 +274,29 @@ export class EtiquetasComponent implements OnInit {
     return false;
   }
 
+  eliminar_etiqueta(codigo: string) {
+    const me = this;
+    const tgen: TablaGenerica = new TablaGenerica();
+    tgen.tabla = 'ARCHIVOS';
+    tgen.campo = 'ETIQUETA';
+    tgen.codigo = codigo;
+    // console.log(tgen);
+    me._helper.Prompt('Confirme que desea realmente eliminar la etiqueta', '', 'warning').then((result) => {
+      if (result.value) {
+        this._tablaGenericaService.eliminarRegistro(tgen.tabla, tgen.campo, tgen.codigo).subscribe(exito => {
+          if (exito) {
+            me.etiqueta = new TablaGenerica();
+            me.refrescar_etiquetas();
+            me._helper.Prompt('Etiqueta eliminada', '').then(() => {
+            });
+          } else {
+            me._helper.Prompt('No se ha podido eliminar la etiqueta', 'Vuelve a intentarlo', 'error');
+          }
+        });
+      } else if (result.dismiss === 'cancel') {
+        me._helper.Prompt('Eliminación cancelada', '', 'error');
+      }
+    });
+    return false;
+  }
 }

@@ -82,7 +82,8 @@ export class PerfilComponent implements OnInit {
     // })
     me._helper.Prompt(
       'Confirme que desea realmente actualizar su contraseña',
-      `Ésta acción no podrá deshacerse`
+      `Ésta acción no podrá deshacerse`,
+      'warning'
     )
       .then((result) => {
         if (result.value) {
