@@ -58,7 +58,6 @@ export class LotesComponent implements OnInit {
     this._clasificaciones = v;
   }
 
-
   private _clasificacion: TablaGenerica[] = [];
   public get clasificacion(): TablaGenerica[] {
     return this._clasificacion;
@@ -74,14 +73,28 @@ export class LotesComponent implements OnInit {
     this._etiqueta = v;
   }
 
+  private _etiquetas: TablaGenerica[] = [];
+  public get etiquetas(): TablaGenerica[] {
+    return this._etiquetas;
+  }
+  public set etiquetas(v: TablaGenerica[]) {
+    this._etiquetas = v;
+  }
 
   // #endregion
 
 
   ngOnInit() {
     this.refrescar_lotes();
-    this._tablaGenericaService.campos('ARCHIVOS', 'CLASIFICACION').subscribe(tablas => {
+    this._tablaGenericaService.consultar(new TablaGenerica('ARCHIVOS', 'CLASIFICACION')).subscribe(tablas => {
+      // tablas.forEach(tabla => {
+      //   this.clasificaciones.push(tabla);
+      // });
       this.clasificaciones = tablas;
+      this._tablaGenericaService.consultar(new TablaGenerica('ARCHIVOS', 'ETIQUETA')).subscribe(rows => {
+        this.etiquetas = rows;
+        // console.log(this.etiquetas);
+      });
     });
   }
 
@@ -233,4 +246,15 @@ export class LotesComponent implements OnInit {
     });
   }
 
+  validar(archivo_id: string) {
+    const codigo = $('#etiqueta' + archivo_id).val();
+    this.archivos.forEach(archivo => {
+      if (archivo.archivo_id !== archivo_id) {
+        const valor = $('#etiqueta' + archivo.archivo_id).val();
+        if (valor === codigo) {
+          $('#etiqueta' + archivo_id).val('');
+        }
+      }
+    });
+  }
 }

@@ -14,6 +14,7 @@ import { ImageZoomModule } from 'angular2-image-zoom';
 import { LoteService } from './servicios/lote.service';
 import { FormsModule } from '@angular/forms';
 import { EtiquetasComponent } from './componentes/etiquetas/etiquetas.component';
+import { ResumenComponent } from './componentes/resumen/resumen.component';
 
 @NgModule({
   imports: [
@@ -25,9 +26,9 @@ import { EtiquetasComponent } from './componentes/etiquetas/etiquetas.component'
     FormsModule
   ],
   exports: [
-    ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent, EtiquetasComponent
+    ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent, EtiquetasComponent, ResumenComponent
   ],
-  declarations: [ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent, EtiquetasComponent],
+  declarations: [ArchivoCargarComponent, ArchivosComponent, ArchivoComponent, LotesComponent, EtiquetasComponent, ResumenComponent],
   providers: [ArchivoService, LoteService]
 })
 export class ArchivoModule { }

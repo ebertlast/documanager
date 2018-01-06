@@ -69,13 +69,20 @@
                 </td>
                 <td>{{archivo.paginas}}</td>
                 <td>
+                  <!-- <select name="clasificacion" id="clasificacion{{archivo.archivo_id}}" (change)="clasificar(archivo.archivo_id)">
+                    <option value="{{cla.codigo}}" *ngFor="let cla of clasificaciones">{{cla.observacion}}</option>
+                  </select> -->
                   <select name="clasificacion" id="clasificacion{{archivo.archivo_id}}" (change)="clasificar(archivo.archivo_id)">
                     <option value=""></option>
-                    <option value="{{cla.codigo}}" *ngFor="let cla of clasificaciones">{{cla.observacion}}</option>
+                    <option value="{{item.codigo}}" *ngFor="let item of clasificaciones">{{item.dato}}</option>
                   </select>
                 </td>
                 <td>
-                  <input type="text" id="etiqueta{{archivo.archivo_id}}" (change)="etiquetar(archivo.archivo_id)">
+                  <!-- <input type="text" id="etiqueta{{archivo.archivo_id}}" (change)="etiquetar(archivo.archivo_id)"> -->
+                  <select name="etiqueta{{archivo.archivo_id}}" id="etiqueta{{archivo.archivo_id}}" (change)="validar(archivo.archivo_id); etiquetar(archivo.archivo_id);">
+                    <option value=""></option>
+                    <option value="{{item.codigo}}" *ngFor="let item of etiquetas">{{item.codigo}}</option>
+                  </select>
                 </td>
                 <td class="hide">
                   <i class="fa fa-check text-navy"></i>

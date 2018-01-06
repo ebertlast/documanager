@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FileGeneric } from '../../modelos/file-generic';
 import { ArchivoService } from '../../servicios/archivo.service';
 import { Helper } from '../../../../app-helper';
@@ -80,6 +80,24 @@ export class ArchivoCargarComponent implements OnInit {
 
       }
     );
+  }
+
+  descartar_archivo(_archivo) {
+    const me = this;
+    me._helper.Prompt('¿Deseas realmente descartar este archivo del lote de subida?', '', 'warning').then((result) => {
+      if (result.value) {
+        let i = 0;
+        this.archivos.forEach(archivo => {
+          if (archivo === _archivo) {
+            this.archivos.splice(i, 1);
+          }
+          i++;
+        });
+      } else if (result.dismiss === 'cancel') {
+        me._helper.Prompt('Descarte cancelado', '', 'error');
+      }
+    });
+    return false;
   }
 
 

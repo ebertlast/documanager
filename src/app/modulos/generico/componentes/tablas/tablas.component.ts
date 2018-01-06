@@ -228,10 +228,10 @@ export class TablasComponent implements OnInit {
       this.tablas.push('ARCHIVOS');
       tablas.forEach(tabla => {
         const _tabla: any = tabla;
-        if (tabla !== 'ARCHIVOS') {
-          this.tablas.push(_tabla.tabla);
-        }
+        this.tablas.push(_tabla.tabla);
       });
+      this.tablas = this._helper.QuitarDuplicados(this.tablas, 0);
+
       const me = this;
       $('#tabla').typeahead({
         source: me.tablas
@@ -251,10 +251,9 @@ export class TablasComponent implements OnInit {
       }
       campos.forEach(campo => {
         const _campo: any = campo;
-        if (this.tabla === 'ARCHIVOS' && _campo !== 'CLASIFICACION' && _campo !== 'PROPIEDAD') {
-          this.campos.push(_campo.campo);
-        }
+        this.campos.push(_campo.campo);
       });
+      this.campos = this._helper.QuitarDuplicados(this.campos, 0);
       // console.log(this.campos);
       const me = this;
       $('#campo').typeahead({
@@ -280,12 +279,10 @@ export class TablasComponent implements OnInit {
     });
   }
   consultar_tablas() {
-    // console.log("Ebert")
-    // console.log("Manuel")
     this.tgens = [];
     this.rerender();
     if (this.tabla === '' || this.campo === '') { return; }
-    this._tablaGenericaService.codigos(this.tabla, this.campo, this.codigo).subscribe(tgens => {
+    this._tablaGenericaService.consultar(new TablaGenerica(this.tabla, this.campo, this.codigo)).subscribe(tgens => {
       this.tgens = tgens;
       this.rerender();
       this.cargando = false;

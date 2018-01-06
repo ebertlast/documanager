@@ -27,13 +27,16 @@
           <div class="profile-info">
             <div class="">
               <div>
-                <h2 class="no-margins">
-                  Alex Smith
+                <h2 class="no-margins" *ngIf="etiqueta.dato!==''">
+                  {{etiqueta.dato}}
                 </h2>
-                <h4>Founder of Groupeq</h4>
-                <small>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form Ipsum
-                  available.
+                <div class="alert alert-danger" *ngIf="etiqueta.dato===''">
+                  <a class="alert-link" routerLink="/./archivos/lotes">Archivo no etiquetado</a>.
+                  Ni clasificado.
+                </div>
+                <h4>{{archivo.tercero}} - {{archivo.sede}}</h4>
+                <small *ngFor="let item of propiedades">
+                  {{item.denominacion}}: {{item.valor}}
                 </small>
               </div>
             </div>
@@ -96,26 +99,27 @@
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
-        <h5>Mostrando {{(itemsPorPagina<pager.totalItems)?itemsPorPagina:pager.totalItems}} de {{pager.totalItems}} páginas</h5>
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-wrench"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-            <li>
-              <a href="#">Config option 1</a>
-            </li>
-            <li>
-              <a href="#">Config option 2</a>
-            </li>
-          </ul>
-          <a class="close-link">
-            <i class="fa fa-times"></i>
-          </a>
-        </div>
+        <h5>Mostrando {{(itemsPorPagina
+          <pager.totalItems)?itemsPorPagina:pager.totalItems}} de {{pager.totalItems}} páginas</h5>
+            <div class="ibox-tools">
+              <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+              </a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-user">
+                <li>
+                  <a href="#">Config option 1</a>
+                </li>
+                <li>
+                  <a href="#">Config option 2</a>
+                </li>
+              </ul>
+              <a class="close-link">
+                <i class="fa fa-times"></i>
+              </a>
+            </div>
       </div>
       <div class="ibox-content">
         <div class="carousel slide" id="carousel3">

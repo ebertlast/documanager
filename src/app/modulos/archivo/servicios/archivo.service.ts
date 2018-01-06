@@ -61,6 +61,7 @@ export class ArchivoService {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/archivos/' + archivo_id;
+    // console.log(_url);
     return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

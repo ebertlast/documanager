@@ -40,7 +40,7 @@
                       <small>Tamaño: {{_helper.BytesToSize(archivo.size)}}</small>
                     </td>
                     <td class="project-actions">
-                      <a href="#" class="btn btn-white btn-sm" [ngClass]="{'hide': cargando}">
+                      <a href="#" class="btn btn-white btn-sm" [ngClass]="{'hide': cargando}" (click)="descartar_archivo(archivo)">
                         <i class="fa fa-trash"></i> Descartar </a>
                     </td>
                   </tr>

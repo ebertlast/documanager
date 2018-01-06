@@ -5,6 +5,8 @@ import { Archivo } from '../../modelos/archivo';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
 import { PagerService } from '../../../generico/servicios/pager.service';
+import { TablaGenerica } from '../../../generico/modelos/tabla-generica';
+import { TablaGenericaService } from '../../../generico/servicios/tabla-generica.service';
 declare var PDFJS: any;
 declare var animationHover: any;
 // declare var elevateZoom: any;
@@ -36,6 +38,7 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     private _archivoService: ArchivoService,
     private _authService: AuthService,
     private _pagerService: PagerService,
+    private _tablaGenericaService: TablaGenericaService
   ) { }
 
 
@@ -47,7 +50,6 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     this._archivo = v;
   }
 
-
   private _imagenes: string[] = [];
   public get imagenes(): string[] {
     return this._imagenes;
@@ -55,6 +57,24 @@ export class ArchivoComponent implements OnInit, OnDestroy {
   public set imagenes(v: string[]) {
     this._imagenes = v;
   }
+
+  private _etiqueta: TablaGenerica = new TablaGenerica();
+  public get etiqueta(): TablaGenerica {
+    return this._etiqueta;
+  }
+  public set etiqueta(v: TablaGenerica) {
+    this._etiqueta = v;
+  }
+
+
+  private _propiedades: Propiedad[] = [];
+  public get propiedades(): Propiedad[] {
+    return this._propiedades;
+  }
+  public set propiedades(v: Propiedad[]) {
+    this._propiedades = v;
+  }
+
 
 
 
@@ -65,13 +85,12 @@ export class ArchivoComponent implements OnInit, OnDestroy {
       me._archivoService.registros(archido_id).subscribe(archivos => {
         archivos.forEach(archivo => {
           me.archivo = archivo;
-          console.log(me.archivo);
+          // console.log(me.archivo);
           me.imagenes = [];
           const paginas = (me.archivo.paginas > 10) ? 10 : me.archivo.paginas;
           for (let i = 1; i <= paginas; i++) {
             me.imagenes.push(me.archivo.directorio + '/' + i + '.jpg');
           }
-
 
           for (let i = 1; i <= me.archivo.paginas; i++) {
             this.allItems.push(me.archivo.directorio + '/' + i + '.jpg');
@@ -79,7 +98,29 @@ export class ArchivoComponent implements OnInit, OnDestroy {
 
           this.set_page(1);
 
-
+          this._tablaGenericaService.consultar(new TablaGenerica('ARCHIVO', 'ETIQUETADO', this.archivo.archivo_id)).subscribe(etiquetas => {
+            etiquetas.forEach(etiqueta => {
+              this.etiqueta = etiqueta;
+            });
+            if (this.etiqueta.dato !== '') {
+              // console.log(this.etiqueta);
+              this._tablaGenericaService.consultar(new TablaGenerica('ETIQUETA', this.etiqueta.dato)).subscribe(propiedades => {
+                // this.propiedades = propiedades;
+                console.log(propiedades);
+                propiedades.forEach(propiedad => {
+                  const _propiedad = new Propiedad();
+                  this._tablaGenericaService.consultar(new TablaGenerica('ARCHIVOS', 'PROPIEDAD', propiedad.codigo)).subscribe(rows => {
+                    rows.forEach(row => {
+                      _propiedad.valor = propiedad.dato;
+                      _propiedad.denominacion = row.dato;
+                    });
+                    this.propiedades.push(_propiedad);
+                    console.log(this.propiedades);
+                  });
+                });
+              });
+            }
+          });
           // #region desplegar el PDF
 
           const pasar = false;
@@ -141,6 +182,8 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     //   lensShape: 'round',
     //   lensSize: 200
     // });
+
+
 
   }
 
@@ -272,7 +315,7 @@ export class ArchivoComponent implements OnInit, OnDestroy {
   }
 
   public set_page(page: number) {
-    console.log('Page:' + page + ', this.allItems.length:' + this.allItems.length);
+    // console.log('Page:' + page + ', this.allItems.length:' + this.allItems.length);
     if (page < 1) {
       // if (page < 1 || page > this.pager.totalPages) {
       // console.log('Página: '+page.toString()+', Total Páginas: '+this.pager.totalPages);
@@ -284,14 +327,20 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     this.pager = this._pagerService.getPager(this.allItems.length, page, this.itemsPorPagina);
     // console.log(this.pager.startIndex);
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems);
+    // console.log(this.pagedItems);
   }
 
   public getImagen(page: number) {
     const imagen = this.pagedItems[page];
-    console.log(imagen);
+    // console.log(imagen);
     return imagen;
-
   }
 
+}
+
+class Propiedad {
+  constructor(
+    public denominacion: string = '',
+    public valor: string = ''
+  ) { }
 }

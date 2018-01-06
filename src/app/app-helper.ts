@@ -335,4 +335,18 @@ export class Helper {
     // return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
     return result + ' ' + sizes[i];
   }
+
+  public QuitarDuplicados(originalArray, prop) {
+    const newArray = [];
+    const lookupObject = {};
+    let i: any;
+    for (i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for (i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
+  }
 }

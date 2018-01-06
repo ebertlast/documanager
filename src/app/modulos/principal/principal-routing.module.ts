@@ -13,6 +13,7 @@ import { SedesComponent } from '../generico/componentes/sedes/sedes.component';
 import { EtiquetasComponent } from '../archivo/componentes/etiquetas/etiquetas.component';
 import { UsuariosComponent } from '../seguridad/usuarios/usuarios.component';
 import { GruposComponent } from '../seguridad/grupos/grupos.component';
+import { ResumenComponent } from '../archivo/componentes/resumen/resumen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '.', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'archivo/:archivo_id', component: ArchivoComponent, canActivate: [AuthGuard] },
       { path: 'archivos/lotes', component: LotesComponent, canActivate: [AuthGuard] },
       { path: 'archivos/etiquetas', component: EtiquetasComponent, canActivate: [AuthGuard] },
+      { path: 'archivos/resumen', component: ResumenComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
       { path: 'sedes', component: SedesComponent, canActivate: [AuthGuard] },
