@@ -75,9 +75,6 @@ export class ArchivoComponent implements OnInit, OnDestroy {
     this._propiedades = v;
   }
 
-
-
-
   ngOnInit() {
     const me = this;
     me.sub = me._activatedRoute.params.subscribe(params => {
@@ -309,6 +306,7 @@ export class ArchivoComponent implements OnInit, OnDestroy {
   }
 
   public abrirArchivo(source: string) {
+    console.log(source);
     const win = window.open();
     win.document.write('<iframe width="100%" height="100%" src="' + source + '" frameborder="0" allowfullscreen></iframe>');
     return false;

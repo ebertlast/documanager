@@ -94,4 +94,29 @@ export class ArchivoService {
       .catch(err => this._authService.CapturarError(err));
   }
 
+  public cantidad_archivos(cuales: number = 0): Observable<number> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/archivos/cantidad/archivos/' + cuales.toString();
+    // console.log(_url);
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+  public cantidad_etiquetas(cuales: number = 0): Observable<number> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/archivos/cantidad/etiquetas/' + cuales.toString();
+    // console.log(_url);
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
 }

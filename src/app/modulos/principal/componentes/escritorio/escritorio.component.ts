@@ -129,6 +129,14 @@ export class EscritorioComponent implements OnInit {
           { url: '', title: 'Resumen', active: true },
         ];
         break;
+      case 'ArchivoComponent':
+        this.title = 'Detalles del archivo';
+        this.navlinks = [
+          { url: 'escritorio', title: 'Inicio', active: false },
+          { url: 'archivos/listado', title: 'Archivos', active: false },
+          { url: '', title: 'Archivo', active: true },
+        ];
+        break;
       default:
         this.title = 'Escritorio';
     }
