@@ -15,6 +15,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { FechacortaPipe } from './pipes/fechacorta.pipe';
 import { SedesComponent } from './componentes/sedes/sedes.component';
 import { TipoDocumentoService } from './servicios/tipo-documento.service';
+import { SerieService } from './servicios/serie.service';
+import { SeriesComponent } from './componentes/series/series.component';
 
 @NgModule({
   imports: [
@@ -23,9 +25,11 @@ import { TipoDocumentoService } from './servicios/tipo-documento.service';
     DataTablesModule
   ],
   exports: [
-    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, SedesComponent
+    CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, SedesComponent,
+    SeriesComponent
   ],
-  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, FechacortaPipe, SedesComponent],
-  providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService]
+  declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent,
+    TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent],
+  providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService, SerieService]
 })
 export class GenericoModule { }

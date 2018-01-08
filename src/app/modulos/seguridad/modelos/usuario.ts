@@ -11,6 +11,7 @@ export class Usuario {
     public grupo: string = '',
     public tipo_id: string = '',
     public identificacion: string = '',
+    public sede_id: string = '',
     public sede: string = '',
     public tercero: string = '',
     public token: string = '',
