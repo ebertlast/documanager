@@ -148,7 +148,7 @@ export class UsuariosComponent implements OnInit {
     this._usuarioService.registros().subscribe(usuarios => {
       this.cargando = false;
       this.usuarios = usuarios;
-      console.log(this.usuarios);
+      // console.log(this.usuarios);
 
       if (this.aux === 0) {
         this.aux++;

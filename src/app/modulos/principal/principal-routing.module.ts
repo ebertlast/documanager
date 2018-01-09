@@ -15,6 +15,7 @@ import { UsuariosComponent } from '../seguridad/usuarios/usuarios.component';
 import { GruposComponent } from '../seguridad/grupos/grupos.component';
 import { ResumenComponent } from '../archivo/componentes/resumen/resumen.component';
 import { SeriesComponent } from '../generico/componentes/series/series.component';
+import { SubseriesComponent } from '../generico/componentes/subseries/subseries.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '.', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'terceros', component: TercerosComponent, canActivate: [AuthGuard] },
       { path: 'sedes', component: SedesComponent, canActivate: [AuthGuard] },
       { path: 'series', component: SeriesComponent, canActivate: [AuthGuard] },
+      { path: 'subseries', component: SubseriesComponent, canActivate: [AuthGuard] },
       { path: 'tablas', component: TablasComponent, canActivate: [AuthGuard] },
       { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },

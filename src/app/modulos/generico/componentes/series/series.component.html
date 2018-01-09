@@ -81,9 +81,9 @@
           <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th class="">Tipo Identificación</th>
-                <th class="">Identificación</th>
-                <th class="">Sede Id</th>
+                <th class="hide">Tipo Identificación</th>
+                <th class="hide">Identificación</th>
+                <th class="hide">Sede Id</th>
                 <th>Identificador</th>
                 <th>Denominación</th>
                 <th>Sede</th>
@@ -93,9 +93,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let s of series" style="cursor: pointer;">
-                <td class="">{{s.tipo_id}}</td>
-                <td class="">{{s.identificacion}}</td>
-                <td class="">{{s.sede_id}}</td>
+                <td class="hide">{{s.tipo_id}}</td>
+                <td class="hide">{{s.identificacion}}</td>
+                <td class="hide">{{s.sede_id}}</td>
                 <td>{{s.serie_id}}</td>
                 <td>{{s.denominacion}}</td>
                 <td>{{s.sede}}</td>

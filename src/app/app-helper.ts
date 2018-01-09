@@ -213,7 +213,7 @@ export class Helper {
 
 
   public ExportarExcel(data) {
-    console.log(data);
+    // console.log(data);
     /******************************************************* */
     // #region Columnas
     const columnas: string[] = [];

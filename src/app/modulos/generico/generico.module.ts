@@ -17,6 +17,8 @@ import { SedesComponent } from './componentes/sedes/sedes.component';
 import { TipoDocumentoService } from './servicios/tipo-documento.service';
 import { SerieService } from './servicios/serie.service';
 import { SeriesComponent } from './componentes/series/series.component';
+import { SubserieService } from './servicios/subserie.service';
+import { SubseriesComponent } from './componentes/subseries/subseries.component';
 
 @NgModule({
   imports: [
@@ -26,10 +28,10 @@ import { SeriesComponent } from './componentes/series/series.component';
   ],
   exports: [
     CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, SedesComponent,
-    SeriesComponent
+    SeriesComponent, SubseriesComponent
   ],
   declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent,
-    TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent],
-  providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService, SerieService]
+    TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent, SubseriesComponent],
+  providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService, SerieService, SubserieService]
 })
 export class GenericoModule { }

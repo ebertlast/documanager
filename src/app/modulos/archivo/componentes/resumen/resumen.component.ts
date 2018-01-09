@@ -49,9 +49,9 @@ export class ResumenComponent implements OnInit {
 
   refrescar() {
     const tabla = new TablaGenerica('ARCHIVOS', 'PROPIEDAD');
-    this._tablaGenericaService.consultar(tabla).subscribe(rows => {
-      console.log(rows);
-    });
+    // this._tablaGenericaService.consultar(tabla).subscribe(rows => {
+    //   // console.log(rows);
+    // });
   }
 
 }

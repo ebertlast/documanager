@@ -100,7 +100,7 @@ export class TablaGenericaService {
     });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/tablas/' + tabla + '/' + campo + '/' + codigo;
-    console.log(_url);
+    // console.log(_url);
     return this._http.delete(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

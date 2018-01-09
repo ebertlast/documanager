@@ -2,28 +2,43 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { DataTableDirective } from 'angular-datatables';
-import { SerieService } from '../../servicios/serie.service';
 import { Serie } from '../../modelos/serie';
-import { Sede } from '../../modelos/sede';
-import { SedeService } from '../../servicios/sede.service';
+import { Subserie } from '../../modelos/subserie';
+import { SubserieService } from '../../servicios/subserie.service';
+import { SerieService } from '../../servicios/serie.service';
 import { Helper } from '../../../../app-helper';
 
 @Component({
-  selector: 'app-series',
-  templateUrl: './series.component.html',
-  styleUrls: ['./series.component.css']
+  selector: 'app-subseries',
+  templateUrl: './subseries.component.html',
+  styleUrls: ['./subseries.component.css']
 })
-export class SeriesComponent implements OnInit {
+export class SubseriesComponent implements OnInit {
   cargando = false;
   editar = false;
-  sedeVacia = new Sede;
+  serieVacia = new Serie();
   constructor(
+    private _subserieService: SubserieService,
     private _serieService: SerieService,
-    private _sedeService: SedeService,
-    private _helper: Helper
+    private _helper: Helper,
   ) { }
 
   // #region Métodos de obtención y establecimiento de valores
+  private _subseries: Subserie[] = [];
+  public get subseries(): Subserie[] {
+    return this._subseries;
+  }
+  public set subseries(v: Subserie[]) {
+    this._subseries = v;
+  }
+
+  private _subserie: Subserie = new Subserie();
+  public get subserie(): Subserie {
+    return this._subserie;
+  }
+  public set subserie(v: Subserie) {
+    this._subserie = v;
+  }
 
   private _series: Serie[] = [];
   public get series(): Serie[] {
@@ -40,23 +55,6 @@ export class SeriesComponent implements OnInit {
   public set serie(v: Serie) {
     this._serie = v;
   }
-
-  private _sedes: Sede[] = [];
-  public get sedes(): Sede[] {
-    return this._sedes;
-  }
-  public set sedes(v: Sede[]) {
-    this._sedes = v;
-  }
-
-  private _sede: Sede = new Sede();
-  public get sede(): Sede {
-    return this._sede;
-  }
-  public set sede(v: Sede) {
-    this._sede = v;
-  }
-
 
   // #endregion
   // #region DataTable
@@ -122,35 +120,39 @@ export class SeriesComponent implements OnInit {
   aux = 0;
   someClickHandler(_row: any): void {
     // console.log(_row);
-    this.serie = new Serie();
-    this.serie.tipo_id = _row[0];
-    this.serie.identificacion = _row[1];
-    this.serie.sede_id = _row[2];
-    this.serie.serie_id = _row[3];
-    this.serie.denominacion = _row[4];
-    this.serie.sede = _row[5];
-    this.serie.tercero = _row[6];
-    this.serie.fecha_registro = new Date(Date.parse(_row[7]));
+    this.subserie = new Subserie();
+    this.subserie.tipo_id = _row[0];
+    this.subserie.identificacion = _row[1];
+    this.subserie.sede_id = _row[2];
+    this.subserie.serie_id = _row[3];
+    this.subserie.serie = _row[4];
+    this.subserie.subserie_id = _row[5];
+    this.subserie.denominacion = _row[6];
+    this.subserie.sede = _row[7];
+    this.subserie.tercero = _row[8];
+    this.subserie.fecha_registro = new Date(Date.parse(_row[9]));
+    this.subserie.consecutivo = _row[10];
+    this.serie = this.serieVacia;
     this.editar = true;
-    this.sede = this.sedeVacia;
-    this.sedes.forEach(sede => {
+    this.series.forEach(serie => {
       if (
-        sede.tipo_id === this.serie.tipo_id &&
-        sede.identificacion === this.serie.identificacion &&
-        sede.sede_id === this.serie.sede_id
+        serie.tipo_id === this.subserie.tipo_id &&
+        serie.identificacion === this.subserie.identificacion &&
+        serie.sede_id === this.subserie.sede_id &&
+        serie.serie_id === this.subserie.serie_id
       ) {
-        this.sede = sede;
+        this.serie = serie;
       }
     });
-    // console.log(this.serie);
+    // console.log(this.subserie);
   }
 
   refrescar_tabla(): void {
     this.cargando = true;
-    this._serieService.registros().subscribe(series => {
+    this._subserieService.registros().subscribe(subseries => {
       this.cargando = false;
-      this.series = series;
-      // console.log(this.series);
+      this.subseries = subseries;
+      // console.log(this.subseries);
 
       if (this.aux === 0) {
         this.aux++;
@@ -170,38 +172,39 @@ export class SeriesComponent implements OnInit {
   ngOnInit() {
     this.refrescar_tabla();
     this.cargando = true;
-    this._sedeService.registros().subscribe(rows => {
+    this._serieService.registros().subscribe(rows => {
       this.cargando = false;
-      this.sedes = rows;
+      this.series = rows;
     });
   }
 
   cancelar() {
-    this.sede = this.sedeVacia;
+    this.serie = this.serieVacia;
     this.serie = new Serie();
     this.editar = false;
   }
 
   guardar() {
     const me = this;
-    if (me.sede.sede_id === '') {
-      $('#sede').focus();
-      return;
-    }
     if (me.serie.serie_id === '') {
-      $('#serie_id').focus();
+      $('#serie').focus();
       return;
     }
-    if (me.serie.denominacion === '') {
+    if (me.subserie.subserie_id === '') {
+      $('#subserie_id').focus();
+      return;
+    }
+    if (me.subserie.denominacion === '') {
       $('#denominacion').focus();
       return;
     }
-    me.serie.tipo_id = me.sede.tipo_id;
-    me.serie.identificacion = me.sede.identificacion;
-    me.serie.sede_id = me.sede.sede_id;
+    me.subserie.serie_id = me.serie.serie_id;
+    me.subserie.tipo_id = me.serie.tipo_id;
+    me.subserie.identificacion = me.serie.identificacion;
+    me.subserie.sede_id = me.serie.sede_id;
     me.cargando = true;
     if (me.editar) {
-      me._serieService.actualizarRegistro(me.serie).subscribe(exito => {
+      me._subserieService.actualizarRegistro(me.subserie).subscribe(exito => {
         me.cargando = false;
         if (exito) {
           me.refrescar_tabla();
@@ -212,7 +215,7 @@ export class SeriesComponent implements OnInit {
         }
       });
     } else {
-      me._serieService.nuevoRegistro(me.serie).subscribe(exito => {
+      me._subserieService.nuevoRegistro(me.subserie).subscribe(exito => {
         me.cargando = false;
         if (exito) {
           me.refrescar_tabla();
@@ -226,24 +229,23 @@ export class SeriesComponent implements OnInit {
   }
 
   borrar() {
-    if (this.serie.serie_id === '') { return; }
+    if (this.subserie.consecutivo <= 0) { return; }
     const me = this;
     me._helper.Prompt('Confirme que desea realmente eliminar el registro', 'Ésta acción no podrá deshacerse', 'warning').then((result) => {
       if (result.value) {
         this.cargando = true;
-        this._serieService.eliminarRegistro(this.serie.serie_id, this.sede.tipo_id, this.sede.identificacion, this.sede.sede_id)
-        .subscribe(exito => {
-          this.cargando = false;
-          if (exito) {
-            this.cancelar();
-            this.refrescar_tabla();
-            this._helper.Prompt('Registro eliminado de la base de datos');
-          }
-        });
+        this._subserieService.eliminarRegistro(this.subserie.consecutivo)
+          .subscribe(exito => {
+            this.cargando = false;
+            if (exito) {
+              this.cancelar();
+              this.refrescar_tabla();
+              this._helper.Prompt('Registro eliminado de la base de datos');
+            }
+          });
       } else if (result.dismiss === 'cancel') {
         me._helper.Prompt('Eliminación cancelada', 'Registro sin cambios', 'error');
       }
     });
   }
-
 }

@@ -221,7 +221,7 @@ export class ArchivosComponent implements OnInit {
     this.cargando = true;
     this._sedeService.registros_por_identificacion(this.tercero.tipo_id, this.tercero.identificacion).subscribe(sedes => {
       this.sedes = sedes;
-      console.log(this.sedes);
+      // console.log(this.sedes);
     });
   }
 

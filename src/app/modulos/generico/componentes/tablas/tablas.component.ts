@@ -194,7 +194,7 @@ export class TablasComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   aux = 0;
   someClickHandler(_row: any): void {
-    console.log(_row);
+    // console.log(_row);
     this.tgen = new TablaGenerica();
     this.tgen.tabla = _row[0];
     this.tgen.campo = _row[1];
@@ -206,7 +206,7 @@ export class TablasComponent implements OnInit {
     this.tgen.observacion = _row[7];
     this.tgen.grupo_id = this.grupo_id;
     this.editar = true;
-    console.log(this.tgen);
+    // console.log(this.tgen);
   }
   // #endregion
 
