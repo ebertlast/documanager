@@ -145,12 +145,20 @@ export class EscritorioComponent implements OnInit {
           { url: '', title: 'Series', active: true },
         ];
         break;
-        case 'SubseriesComponent':
+      case 'SubseriesComponent':
         this.title = 'Subseries';
         this.navlinks = [
           { url: '', title: 'Inicio', active: false },
           { url: '', title: 'Sistema', active: true },
           { url: '', title: 'Subseries', active: true },
+        ];
+        break;
+      case 'ConvencionesComponent':
+        this.title = 'Convenciones';
+        this.navlinks = [
+          { url: '', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Convenciones', active: true },
         ];
         break;
       default:

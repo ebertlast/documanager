@@ -1,0 +1,102 @@
+<div class="row">
+  <!-- Formulario -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Subseries</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle hide" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link hide">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <div role="form" class="form-inline">
+          <div class="form-group">
+            <label for="convencion_id" class="sr-only">Identificador</label>
+            <input type="text" maxlength="2" placeholder="Identificador" id="convencion_id" name="convencion_id" title="Identificador" class="form-control input-sm"
+              [(ngModel)]="convencion.convencion_id" [disabled]="editar">
+          </div>
+          <div class="form-group">
+            <label for="denominacion" class="sr-only">Denominación</label>
+            <input type="text" placeholder="Denominación" id="denominacion" name="denominacion" title="Denominación" class="form-control input-sm"
+              [(ngModel)]="convencion.denominacion">
+          </div>
+          <div class="checkbox m-r-xs">
+            <input type="checkbox" id="activo" name="activo" [(ngModel)]="convencion.activo" title="Estado de la convención">
+            <label for="activo">
+              Activo
+            </label>
+          </div>
+
+          <button class="btn btn-primary " type="button" (click)="guardar()">
+            <i class="fa fa-check"></i>&nbsp;Guardar
+          </button>
+          <button class="btn btn-warning " type="button" (click)="cancelar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-times"></i>
+            <span class="bold">Cancelar</span>
+          </button>
+          <button class="btn btn-danger " type="button" (click)="borrar()" [ngClass]="{'hide': !editar}">
+            <i class="fa fa-trash"></i>&nbsp;&nbsp;
+            <span class="bold">Borrar</span>
+          </button>
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de Formulario -->
+  <!-- Tabla -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+
+      <div class="ibox-content" style="">
+        <div class="row">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>Convencion Id</th>
+                <th>Denominacion</th>
+                <th>Activo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of convenciones" style="cursor: pointer;">
+                <td>{{c.convencion_id}}</td>
+                <td>{{c.denominacion}}</td>
+                <td>{{(c.activo===1)?'SI':'NO'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de tabla -->
+
+
+</div>
