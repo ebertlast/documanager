@@ -17,6 +17,7 @@ import { ResumenComponent } from '../archivo/componentes/resumen/resumen.compone
 import { SeriesComponent } from '../generico/componentes/series/series.component';
 import { SubseriesComponent } from '../generico/componentes/subseries/subseries.component';
 import { ConvencionesComponent } from '../generico/componentes/convenciones/convenciones.component';
+import { TiposComponent } from '../generico/componentes/tipos/tipos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '.', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'series', component: SeriesComponent, canActivate: [AuthGuard] },
       { path: 'subseries', component: SubseriesComponent, canActivate: [AuthGuard] },
       { path: 'convenciones', component: ConvencionesComponent, canActivate: [AuthGuard] },
+      { path: 'tipos', component: TiposComponent, canActivate: [AuthGuard] },
       { path: 'tablas', component: TablasComponent, canActivate: [AuthGuard] },
       { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },

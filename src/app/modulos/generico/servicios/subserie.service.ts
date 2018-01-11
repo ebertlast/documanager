@@ -34,6 +34,8 @@ export class SubserieService {
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
     const _url = environment.apiurl + '/subseries/consultar';
+    // console.log(_json);
+    // console.log(_url);
     return this._http.post(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

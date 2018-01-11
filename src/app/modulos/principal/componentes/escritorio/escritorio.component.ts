@@ -161,6 +161,14 @@ export class EscritorioComponent implements OnInit {
           { url: '', title: 'Convenciones', active: true },
         ];
         break;
+      case 'TiposComponent':
+        this.title = 'Tipos Documental';
+        this.navlinks = [
+          { url: '', title: 'Inicio', active: false },
+          { url: '', title: 'Sistema', active: true },
+          { url: '', title: 'Tipos Documental', active: true },
+        ];
+        break;
       default:
         this.title = 'Escritorio';
     }

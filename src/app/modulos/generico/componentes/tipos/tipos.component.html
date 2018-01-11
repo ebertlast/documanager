@@ -1,0 +1,209 @@
+<div class="row">
+  <!-- Formulario -->
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Tipos Documentales</h5>
+        <div class="ibox-tools">
+          <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle hide" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link hide">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+
+        <div class="col-lg-12" [ngClass]="{'hide': !editar}">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <i class="fa fa-info-circle"></i> Clasificación
+            </div>
+            <div class="panel-body">
+            {{tercero.razon_social}}
+            <i class="fa fa-angle-double-right"></i>
+            {{sede.razon_social}}
+            <i class="fa fa-angle-double-right"></i>
+            {{serie.denominacion}}
+            <i class="fa fa-angle-double-right"></i>
+            {{subserie.denominacion}}
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div role="form" class="form-inline">
+          <div class="form-group" [ngClass]="{'hide': editar}">
+            <label for="tercero" class="sr-only">Entidad Productora</label>
+            <select name="tercero" id="tercero" [(ngModel)]="tercero" class="form-control input-sm" title="Entidad Productora" placeholder="Entidad Productora"
+              (change)="refrescar_sedes()">
+              <option [ngValue]="terceroVacio" selected="selected">Seleccione una Entidad</option>
+              <option [ngValue]="t" *ngFor="let t of terceros">{{t.razon_social | capitalizar}}</option>
+            </select>
+          </div>
+          <div class="form-group" [ngClass]="{'hide': tercero.identificacion==='' || editar}" >
+            <label for="sede" class="sr-only">Oficina Productora</label>
+            <select name="sede" id="sede" [(ngModel)]="sede" class="form-control input-sm" title="Oficina Productora" placeholder="Oficina Productora"
+               (change)="refrescar_series()">
+              <option [ngValue]="sedeVacia" selected="selected">Seleccione una Oficina</option>
+              <option [ngValue]="s" *ngFor="let s of sedes">{{s.razon_social | capitalizar}}</option>
+            </select>
+          </div>
+          <div class="form-group" [ngClass]="{'hide': sede.sede_id==='' || editar}">
+            <label for="serie" class="sr-only">Serie</label>
+            <select name="serie" id="serie" [(ngModel)]="serie" class="form-control input-sm" title="Serie" placeholder="Serie"
+              (change)="refrescar_subseries()">
+              <option [ngValue]="serieVacia" selected="selected">Seleccione una Serie</option>
+              <option [ngValue]="s" *ngFor="let s of series">{{s.denominacion | capitalizar}}</option>
+            </select>
+          </div>
+          <div class="form-group" [ngClass]="{'hide': serie.serie_id==='' || editar}">
+            <label for="subserie" class="sr-only">Subserie</label>
+            <select name="subserie" id="subserie" [(ngModel)]="subserie" class="form-control input-sm" title="Subserie" placeholder="Subserie"
+              >
+              <option [ngValue]="serieVacia" selected="selected">Seleccione una Subserie</option>
+              <option [ngValue]="s" *ngFor="let s of subseries">{{s.denominacion | capitalizar}}</option>
+            </select>
+          </div>
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+          </div>
+          <div class="hr-line-dashed" [ngClass]="{'hide': subserie.consecutivo <= 0}"></div>
+          <div class="form-group" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <label for="retencion_gestion">(Años) Retención Gestión</label>
+            <input type="number" placeholder="Retención Gestión" id="retencion_gestion" name="retencion_gestion" title="Cantidad de Años de Retención Gestión"
+              class="form-control input-sm" [(ngModel)]="tipo.retencion_gestion">
+          </div>
+          <div class="form-group" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <label for="retencion_central">(Años) Retención Central</label>
+            <input type="number" placeholder="Retención Central" id="retencion_central" name="retencion_central" title="Cantidad de Años de Retención Central"
+              class="form-control input-sm" [(ngModel)]="tipo.retencion_central">
+          </div>
+          <div class="checkbox m-r-xs" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <input type="checkbox" id="soporte_electronico" name="soporte_electronico" [(ngModel)]="tipo.soporte_electronico" title="Soporte Electrónico">
+            <label for="soporte_electronico">
+              Soporte Electrónico
+            </label>
+          </div>
+          <div class="checkbox m-r-xs" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <input type="checkbox" id="soporte_fisico" name="soporte_fisico" [(ngModel)]="tipo.soporte_fisico" title="Soporte Físico">
+            <label for="soporte_fisico">
+              Soporte Físico
+            </label>
+          </div>
+          <div class="checkbox m-r-xs" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <input type="checkbox" id="activo" name="activo" [(ngModel)]="tipo.activo" title="Estado del tipo documental">
+            <label for="activo">
+              Activo
+            </label>
+          </div>
+          <div class="hr-line-dashed" [ngClass]="{'hide': subserie.consecutivo <= 0}"></div>
+          <div class="form-group" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <label>
+              Disposiciones:
+            </label>
+            <div class="checkbox m-r-xs" [ngClass]="{'hide': subserie.consecutivo <= 0}" *ngFor="let item of convenciones">
+              <input type="checkbox" id="disposicion{{item.convencion_id}}" name="disposicion{{item.convencion_id}}" title="{{item.denominacion}}"
+                (click)="agregar_quitar_convenciones()" [checked]="chequear_disposicion(item.convencion_id)">
+              <label for="disposicion{{item.convencion_id}}">
+                {{item.denominacion|capitalizar}}
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="hr-line-dashed" [ngClass]="{'hide': subserie.consecutivo <= 0}"></div>
+
+        <div role="form" class="form-horizontal">
+          <div class="form-group" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <label for="denominacion">Nombre</label>
+            <input type="text" placeholder="Nombre" id="denominacion" name="denominacion" title="Denominación" class="form-control input-sm"
+              [(ngModel)]="tipo.denominacion">
+          </div>
+          <div class="form-group" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+            <label for="procedimiento">Procedimiento</label>
+            <input type="text" placeholder="Procedimiento" id="procedimiento" name="procedimiento" title="Procedmiento" class="form-control input-sm"
+              [(ngModel)]="tipo.procedimiento">
+          </div>
+
+        </div>
+        <button class="btn btn-primary " type="button" (click)="guardar()" [ngClass]="{'hide': subserie.consecutivo <= 0}">
+          <i class="fa fa-check"></i>&nbsp;Guardar
+        </button>
+        <button class="btn btn-warning " type="button" (click)="cancelar()" [ngClass]="{'hide': !editar}">
+          <i class="fa fa-times"></i>
+          <span class="bold">Cancelar</span>
+        </button>
+        <button class="btn btn-danger " type="button" (click)="borrar()" [ngClass]="{'hide': !editar}">
+          <i class="fa fa-trash"></i>&nbsp;&nbsp;
+          <span class="bold">Borrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de Formulario -->
+  <!-- Tabla -->
+  <div class="col-lg-12" [ngClass]="{'hide': tipos.length<=0}">
+    <div class="ibox float-e-margins">
+
+      <div class="ibox-content" style="">
+        <div class="row">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th class="">Identificación</th>
+                <th class="">Consecutivo</th>
+                <th class="">Nombre</th>
+                <th>Retención Gestión</th>
+                <th>Retención Central</th>
+                <th>Soporte Electrónico</th>
+                <th>Soporte Físico</th>
+                <th>Procedimiento</th>
+                <th>Activo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of tipos" style="cursor: pointer;">
+                <td class="">{{item.tipo_id}}</td>
+                <td class="">{{item.consecutivo}}</td>
+                <td class="">{{item.denominacion}}</td>
+                <td>{{item.retencion_gestion}}</td>
+                <td>{{item.retencion_central}}</td>
+                <td>{{(item.soporte_electronico===0)?'NO':'SI'}}</td>
+                <td>{{(item.soporte_fisico===0)?'NO':'SI'}}</td>
+                <td>{{item.procedimiento}}</td>
+                <td>{{(item.activo===0)?'NO':'SI'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin de tabla -->
+
+
+</div>

@@ -21,6 +21,9 @@ import { SubserieService } from './servicios/subserie.service';
 import { SubseriesComponent } from './componentes/subseries/subseries.component';
 import { ConvencionesComponent } from './componentes/convenciones/convenciones.component';
 import { ConvencionService } from './servicios/convencion.service';
+import { TipoService } from './servicios/tipo.service';
+import { TiposComponent } from './componentes/tipos/tipos.component';
+import { DisposicionService } from './servicios/disposicion.service';
 
 @NgModule({
   imports: [
@@ -33,8 +36,9 @@ import { ConvencionService } from './servicios/convencion.service';
     SeriesComponent, SubseriesComponent, ConvencionesComponent
   ],
   declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent,
-    TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent, SubseriesComponent, ConvencionesComponent],
+    TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent, SubseriesComponent,
+    ConvencionesComponent, TiposComponent],
   providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService,
-    SerieService, SubserieService, ConvencionService]
+    SerieService, SubserieService, ConvencionService, TipoService, DisposicionService]
 })
 export class GenericoModule { }
