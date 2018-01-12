@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <!-- Formulario -->
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
@@ -91,28 +91,28 @@
           <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th class="">Tipo Identificación</th>
-                <th class="">Identificación</th>
-                <th>Sede</th>
-                <th>Grupo</th>
-                <th>Usuario</th>
-                <th>Nombres</th>
-                <th>Email</th>
-                <th>Activo</th>
-                <th>Fecha Registro</th>
+                <th class="hide">Tipo Identificación</th>
+                <th class="hide">Identificación</th>
+                <th class="medio centrado">Oficina Productora</th>
+                <th class="medio centrado">Grupo</th>
+                <th class="medio centrado">Usuario</th>
+                <th class="medio centrado">Nombres</th>
+                <th class="medio centrado">Email</th>
+                <th class="medio centrado">Activo</th>
+                <th class="medio centrado">Fecha Registro</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let u of usuarios" style="cursor: pointer;">
-                <td class="">{{u.tipo_id}}</td>
-                <td class="">{{u.identificacion}}</td>
-                <td>{{u.sede}}</td>
-                <td>{{u.grupo_id}}</td>
-                <td>{{u.usuario_id}}</td>
-                <td>{{u.nombres}}</td>
-                <td>{{u.email}}</td>
-                <td>{{(u.activo===1)?'SI':'NO'}}</td>
-                <td>{{u.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+                <td class="hide">{{u.tipo_id}}</td>
+                <td class="hide">{{u.identificacion}}</td>
+                <td>{{u.sede|capitalizar}}</td>
+                <td class="medio centrado">{{u.grupo_id|uppercase}}</td>
+                <td class="medio centrado">{{u.usuario_id|uppercase}}</td>
+                <td>{{u.nombres|capitalizar}}</td>
+                <td>{{u.email|lowercase}}</td>
+                <td class="medio centrado">{{(u.activo===1)?'SI':'NO'}}</td>
+                <td class="medio centrado">{{u.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
               </tr>
             </tbody>
           </table>

@@ -305,6 +305,8 @@ export class TiposComponent implements OnInit {
   }
 
   refrescar_sedes() {
+    this.series = [];
+    this.subseries = [];
     if (this.tercero.identificacion === '') {
       $('#tercero').focus();
       return;

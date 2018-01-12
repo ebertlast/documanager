@@ -55,7 +55,7 @@ export class ConvencionService {
       .catch(err => this._authService.CapturarError(err));
   }
   public actualizarRegistro(model: Model): Observable<boolean> {
-    console.log(model);
+    // console.log(model);
     const _headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Bearer ' + this._authService.Usuario().token

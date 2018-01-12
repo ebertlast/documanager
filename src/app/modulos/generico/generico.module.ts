@@ -24,6 +24,8 @@ import { ConvencionService } from './servicios/convencion.service';
 import { TipoService } from './servicios/tipo.service';
 import { TiposComponent } from './componentes/tipos/tipos.component';
 import { DisposicionService } from './servicios/disposicion.service';
+import { ElegirTipoDocumentoComponent } from './componentes/elegir-tipo-documento/elegir-tipo-documento.component';
+import { TablaRetencionComponent } from './componentes/tabla-retencion/tabla-retencion.component';
 
 @NgModule({
   imports: [
@@ -33,11 +35,11 @@ import { DisposicionService } from './servicios/disposicion.service';
   ],
   exports: [
     CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent, TablasComponent, SedesComponent,
-    SeriesComponent, SubseriesComponent, ConvencionesComponent
+    SeriesComponent, SubseriesComponent, ConvencionesComponent, ElegirTipoDocumentoComponent, TablaRetencionComponent
   ],
   declarations: [CapitalizarPipe, FechaPipe, FiltrarPipe, SafePipe, TercerosComponent,
     TablasComponent, FechacortaPipe, SedesComponent, SeriesComponent, SubseriesComponent,
-    ConvencionesComponent, TiposComponent],
+    ConvencionesComponent, TiposComponent, ElegirTipoDocumentoComponent, TablaRetencionComponent],
   providers: [PagerService, TablaGenericaService, TerceroService, SedeService, TipoDocumentoService,
     SerieService, SubserieService, ConvencionService, TipoService, DisposicionService]
 })

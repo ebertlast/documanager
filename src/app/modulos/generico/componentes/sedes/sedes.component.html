@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <!-- Formulario -->
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
@@ -90,11 +90,11 @@
               <tr>
                 <th class="hide">Tipo Identificación</th>
                 <th class="hide">Identificación Entidad</th>
-                <th>Entidad</th>
-                <th>Identificación</th>
-                <th>Razón Social</th>
-                <th>Activa</th>
-                <th>Fecha de Registro</th>
+                <th class="medio centrado">Entidad</th>
+                <th class="medio centrado">Identificación</th>
+                <th class="medio centrado">Razón Social</th>
+                <th class="medio centrado">Activa</th>
+                <th class="medio centrado">Fecha de Registro</th>
                 <th class="hide">Logo</th>
               </tr>
             </thead>
@@ -102,11 +102,11 @@
               <tr *ngFor="let s of sedes" style="cursor: pointer;">
                 <td class="hide">{{s.tipo_id}}</td>
                 <td class="hide">{{s.identificacion}}</td>
-                <td>{{s.tercero}}</td>
-                <td>{{s.sede_id}}</td>
-                <td>{{s.razon_social}}</td>
-                <td>{{(s.activa===1)?'SI':'NO'}}</td>
-                <td>{{s.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+                <td>{{s.tercero|capitalizar}}</td>
+                <td class="medio centrado">{{s.sede_id}}</td>
+                <td>{{s.razon_social|capitalizar}}</td>
+                <td class="medio centrado">{{(s.activa===1)?'SI':'NO'}}</td>
+                <td class="medio centrado">{{s.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
                 <td class="hide">{{s.logo}}</td>
               </tr>
             </tbody>

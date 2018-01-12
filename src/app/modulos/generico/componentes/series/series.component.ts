@@ -142,11 +142,12 @@ export class SeriesComponent implements OnInit {
         this.sede = sede;
       }
     });
-    // console.log(this.serie);
+    console.log(this.serie);
   }
 
   refrescar_tabla(): void {
     this.cargando = true;
+    this.series = [];
     this._serieService.registros().subscribe(series => {
       this.cargando = false;
       this.series = series;
@@ -232,14 +233,14 @@ export class SeriesComponent implements OnInit {
       if (result.value) {
         this.cargando = true;
         this._serieService.eliminarRegistro(this.serie.serie_id, this.sede.tipo_id, this.sede.identificacion, this.sede.sede_id)
-        .subscribe(exito => {
-          this.cargando = false;
-          if (exito) {
-            this.cancelar();
-            this.refrescar_tabla();
-            this._helper.Prompt('Registro eliminado de la base de datos');
-          }
-        });
+          .subscribe(exito => {
+            this.cargando = false;
+            if (exito) {
+              this.cancelar();
+              this.refrescar_tabla();
+              this._helper.Prompt('Registro eliminado de la base de datos');
+            }
+          });
       } else if (result.dismiss === 'cancel') {
         me._helper.Prompt('Eliminación cancelada', 'Registro sin cambios', 'error');
       }

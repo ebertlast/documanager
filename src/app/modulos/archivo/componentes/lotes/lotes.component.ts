@@ -7,7 +7,8 @@ import { TablaGenericaService } from '../../../generico/servicios/tabla-generica
 import { TablaGenerica } from '../../../generico/modelos/tabla-generica';
 import { Helper } from '../../../../app-helper';
 import { Router } from '@angular/router';
-
+import { Tipo } from '../../../generico/modelos/tipo';
+declare var $: any;
 @Component({
   selector: 'app-lotes',
   templateUrl: './lotes.component.html',
@@ -81,6 +82,14 @@ export class LotesComponent implements OnInit {
     this._etiquetas = v;
   }
 
+  private _tipo_documental: Tipo = new Tipo();
+  public get tipo_documental(): Tipo {
+    return this._tipo_documental;
+  }
+  public set tipo_documental(v: Tipo) {
+    this._tipo_documental = v;
+  }
+
   // #endregion
 
 
@@ -92,10 +101,16 @@ export class LotesComponent implements OnInit {
       // });
       this.clasificaciones = tablas;
       this._tablaGenericaService.consultar(new TablaGenerica('ARCHIVOS', 'ETIQUETA')).subscribe(rows => {
-        this.etiquetas = rows;
+        rows.forEach(etiqueta => {
+          if (etiqueta.cantidad <= 0) {
+            this.etiquetas.push(etiqueta);
+          }
+        });
+        // this.etiquetas = rows;
         // console.log(this.etiquetas);
       });
     });
+
   }
 
   public refrescar_lotes() {
@@ -186,10 +201,24 @@ export class LotesComponent implements OnInit {
   }
 
   private revisar() {
-    if (this.archivos.length === this.clasificacion.length && this.archivos.length === this.etiqueta.length) {
+    if (
+      // this.archivos.length === this.clasificacion.length
+      // &&
+      this.archivos.length === this.etiqueta.length
+    ) {
       this.guardar = true;
     } else {
       this.guardar = false;
+    }
+    if (this.guardar) {
+
+      this.archivos.forEach(archivo => {
+        // console.log(archivo);
+        const fecha = $('#fecha' + archivo.archivo_id).val();
+        if (fecha === '') {
+          this.guardar = false;
+        }
+      });
     }
     // console.log('this.archivos.length: ', this.archivos.length);
     // console.log('this.clasificacion.length: ', this.clasificacion.length);
@@ -206,6 +235,10 @@ export class LotesComponent implements OnInit {
     // });
     this.cargando = true;
     this.archivos.forEach(archivo => {
+
+      archivo.consecutivo_tipo = this.tipo_documental.consecutivo;
+      archivo.fecha_archivo = $('#fecha' + archivo.archivo_id).val();
+
       let arc_a_clasificar: TablaGenerica = new TablaGenerica();
       let arc_a_etiquetar: TablaGenerica = new TablaGenerica();
       this.clasificacion.forEach(element => {
@@ -218,12 +251,19 @@ export class LotesComponent implements OnInit {
           arc_a_etiquetar = element;
         }
       });
-      this._tablaGenericaService.nuevoRegistro(arc_a_clasificar).subscribe(clasificado => {
-        if (clasificado) {
+      // this._tablaGenericaService.nuevoRegistro(arc_a_clasificar).subscribe(clasificado => {
+      //   if (clasificado) {
+      this._archivoService.actualizar_registro(archivo).subscribe(actualizado => {
+        if (actualizado) {
           this._tablaGenericaService.nuevoRegistro(arc_a_etiquetar).subscribe(etiquetado => {
             this.cargando = false;
             if (etiquetado) {
-              this._helper.Notificacion('Archivo ' + archivo.nombre + ' clasificado y etiquetado correctamente');
+              const _etiqueta = new TablaGenerica('ARCHIVOS', 'ETIQUETA', arc_a_etiquetar.dato);
+              _etiqueta.cantidad = 1;
+              _etiqueta.dato = archivo.archivo_id;
+              this._tablaGenericaService.actualizarRegistro(_etiqueta).subscribe((actualizada) => {
+                this._helper.Notificacion('Archivo ' + archivo.nombre + ' clasificado y etiquetado correctamente');
+              });
             } else {
               // TODO
             }
@@ -232,6 +272,11 @@ export class LotesComponent implements OnInit {
           // TODO
         }
       });
+
+      //   } else {
+      //     // TODO
+      //   }
+      // });
     });
     // this.refrescar_lotes();
     // this._helper.Prompt('Archivos etiquetados y ')
@@ -256,5 +301,17 @@ export class LotesComponent implements OnInit {
         }
       }
     });
+  }
+
+  set_tipo_documental(event): void {
+    // const me = this;
+    // me.formulario.Direccion = event.direccion;
+    // me.refrescarFormulario();
+    // console.log(event.tipo_documental);
+    this.tipo_documental = event.tipo_documental;
+  }
+
+  actualizar_fecha_archivo(archivo_id: string) {
+    // console.log(archivo_id);
   }
 }

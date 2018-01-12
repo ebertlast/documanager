@@ -80,9 +80,12 @@ export class ArchivoService {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/archivos/lote/' + lote_id;
+    console.log(_url);
     return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
+        // console.log(data);
+
         const archivos: Model[] = [];
         data.forEach(archivo => {
           const modelo: Model = archivo;
@@ -106,12 +109,33 @@ export class ArchivoService {
       })
       .catch(err => this._authService.CapturarError(err));
   }
+
   public cantidad_etiquetas(cuales: number = 0): Observable<number> {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().token });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/archivos/cantidad/etiquetas/' + cuales.toString();
     // console.log(_url);
     return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
+  public actualizar_registro(model: Model): Observable<boolean> {
+    // console.log(model);
+    const _headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ' + this._authService.Usuario().token
+    });
+    const _options = new RequestOptions({ headers: _headers });
+    const _json = 'json=' + JSON.stringify({ model });
+    const _url = environment.apiurl + '/archivos/actualizar';
+    // console.log(this._authService.Usuario().token);
+    // console.log(_json);
+    // console.log(_url);
+    return this._http.post(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
         return data;

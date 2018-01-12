@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
@@ -23,6 +23,7 @@
           </a>
         </div>
       </div>
+
       <div class="ibox-content">
         <div class="row">
           <div class="col-sm-5 m-b-xs">
@@ -30,6 +31,7 @@
               <option value="{{lote}}" *ngFor="let lote of lotesUnicos">{{lote}}</option>
             </select>
           </div>
+
           <div class="col-sm-4 m-b-xs hide">
             <div data-toggle="buttons" class="btn-group">
               <label class="btn btn-sm btn-white">
@@ -49,13 +51,16 @@
             </div>
           </div>
         </div>
-        <div class="table-responsive">
+        <app-elegir-tipo-documento (EnviarTipoDocumental)="set_tipo_documental($event)" [ngClass]="{'hide': lote===''}"></app-elegir-tipo-documento>
+        <hr>
+        <div class="table-responsive" [ngClass]="{'hide': tipo_documental.tipo_id===''}">
           <table class="table table-striped">
             <thead>
               <tr>
                 <th>Nombre </th>
                 <th>Páginas </th>
-                <th>Clasificación</th>
+                <th>Fecha Archivo</th>
+                <th class="hide">Clasificación</th>
                 <th>Etiqueta</th>
                 <th class="hide"></th>
               </tr>
@@ -69,6 +74,14 @@
                 </td>
                 <td>{{archivo.paginas}}</td>
                 <td>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                    <input type="text" class="form-control input-sm" data-mask="99/99/9999" placeholder="" size="2" [(ngModel)]="archivo.fecha_archivo" name="fecha{{archivo.archivo_id}}" id="fecha{{archivo.archivo_id}}" (change)="actualizar_fecha_archivo(archivo.archivo_id)">
+                  </div>
+                </td>
+                <td class="hide">
                   <!-- <select name="clasificacion" id="clasificacion{{archivo.archivo_id}}" (change)="clasificar(archivo.archivo_id)">
                     <option value="{{cla.codigo}}" *ngFor="let cla of clasificaciones">{{cla.observacion}}</option>
                   </select> -->

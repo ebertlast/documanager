@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <!-- Formulario -->
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
@@ -84,11 +84,11 @@
                 <th class="hide">Tipo Identificación</th>
                 <th class="hide">Identificación</th>
                 <th class="hide">Sede Id</th>
-                <th>Identificador</th>
-                <th>Denominación</th>
-                <th>Sede</th>
-                <th>tercero</th>
-                <th>Fecha Registro</th>
+                <th class="medio centrado">Identificador</th>
+                <th class="medio centrado">Denominación</th>
+                <th class="medio centrado">Oficina</th>
+                <th class="medio centrado">Entidad</th>
+                <th class="medio centrado">Fecha Registro</th>
               </tr>
             </thead>
             <tbody>
@@ -96,11 +96,11 @@
                 <td class="hide">{{s.tipo_id}}</td>
                 <td class="hide">{{s.identificacion}}</td>
                 <td class="hide">{{s.sede_id}}</td>
-                <td>{{s.serie_id}}</td>
-                <td>{{s.denominacion}}</td>
-                <td>{{s.sede}}</td>
-                <td>{{s.tercero}}</td>
-                <td>{{s.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+                <td class="medio centrado">{{s.serie_id}}</td>
+                <td>{{s.denominacion|capitalizar}}</td>
+                <td>{{s.sede|capitalizar}}</td>
+                <td>{{s.tercero|capitalizar}}</td>
+                <td class="medio centrado">{{s.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
               </tr>
             </tbody>
           </table>

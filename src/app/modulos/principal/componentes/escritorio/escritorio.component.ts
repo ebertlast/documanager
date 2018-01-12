@@ -169,6 +169,14 @@ export class EscritorioComponent implements OnInit {
           { url: '', title: 'Tipos Documental', active: true },
         ];
         break;
+        case 'TablaRetencionComponent':
+        this.title = 'Tabla de Retención Documental TRD';
+        this.navlinks = [
+          { url: '', title: 'Inicio', active: false },
+          { url: 'archivos/listado', title: 'Archivos', active: false },
+          { url: '', title: 'Tabla de Retención Documental TRD', active: true },
+        ];
+        break;
       default:
         this.title = 'Escritorio';
     }

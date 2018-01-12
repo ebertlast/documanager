@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <!-- Formulario -->
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
@@ -27,10 +27,10 @@
       <div class="ibox-content">
         <div role="form" class="form-inline">
           <div class="form-group">
-            <label for="sede" class="sr-only">Sede</label>
-            <select name="sede" id="sede" [(ngModel)]="sede" class="form-control input-sm" title="Sede" placeholder="Sede"
+            <label for="sede" class="sr-only">Oficina</label>
+            <select name="sede" id="sede" [(ngModel)]="sede" class="form-control input-sm" title="Oficina" placeholder="Oficina"
               [disabled]="editar">
-              <option [ngValue]="sedeVacia" selected="selected">Seleccione una sede</option>
+              <option [ngValue]="sedeVacia" selected="selected">Seleccione una oficina</option>
               <option [ngValue]="s" *ngFor="let s of sedes">{{s.razon_social}}</option>
             </select>
           </div>
@@ -91,11 +91,11 @@
                 <th class="hide">Tipo Identificación</th>
                 <th class="hide">Identificación</th>
                 <th class="hide">Sede Id</th>
-                  <th>Sede</th>
-                  <th>Identificador</th>
-                  <th>Denominación</th>
-                  <th>Activo</th>
-                  <th>Fecha Registro</th>
+                  <th class="medio centrado">Oficina</th>
+                  <th class="medio centrado">Identificador</th>
+                  <th class="medio centrado">Denominación</th>
+                  <th class="medio centrado">Activo</th>
+                  <th class="medio centrado">Fecha Registro</th>
               </tr>
             </thead>
             <tbody>
@@ -103,11 +103,11 @@
                 <td class="hide">{{g.tipo_id}}</td>
                 <td class="hide">{{g.identificacion}}</td>
                 <td class="hide">{{g.sede_id}}</td>
-                <td>{{g.sede}}</td>
-                <td>{{g.grupo_id}}</td>
-                <td>{{g.denominacion}}</td>
-                <td>{{(g.activo===1)?'SI':'NO'}}</td>
-                <td>{{g.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
+                <td>{{g.sede|capitalizar}}</td>
+                <td class="medio centrado">{{g.grupo_id}}</td>
+                <td>{{g.denominacion|capitalizar}}</td>
+                <td class="medio centrado">{{(g.activo===1)?'SI':'NO'}}</td>
+                <td class="medio centrado">{{g.fecha_registro.date|date:'yyyy-MM-dd'}}</td>
               </tr>
             </tbody>
           </table>

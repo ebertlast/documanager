@@ -1,8 +1,9 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <div class="col-sm-8">
     <div class="ibox">
       <div class="ibox-content">
         <h2>Etiquetas</h2>
+
         <div class="input-group">
           <input type="text" placeholder="Consultar o agregar etiquetas " class="input form-control" [(ngModel)]="texto_etiqueta" name="texto_etiqueta"
             id="texto_etiqueta" tabindex="1" autofocus>
@@ -25,9 +26,13 @@
             <div class="sk-cube"></div>
           </div>
 
+
+
+
           <div class="col-lg-5" [ngClass]="{'hide': etiquetas.length<=0}">
             <div class="ibox float-e-margins">
               <div class="ibox-content">
+
                 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                   <thead>
                     <tr>

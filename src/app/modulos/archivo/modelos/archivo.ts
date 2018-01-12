@@ -15,5 +15,7 @@ export class Archivo {
     public tercero: string = '',
     public lote: string = '',
     public procesado: number = 0,
+    public fecha_archivo: Date = null,
+    public consecutivo_tipo: number = -1,
   ) { }
 }

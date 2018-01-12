@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeInRightBig">
   <!-- Formulario -->
   <div class="col-lg-12">
     <div class="ibox float-e-margins">
@@ -79,16 +79,16 @@
           <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th>Convencion Id</th>
-                <th>Denominacion</th>
-                <th>Activo</th>
+                <th class="medio centrado">Identificador</th>
+                <th class="medio centrado">Denominación</th>
+                <th class="medio centrado">Activo</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let c of convenciones" style="cursor: pointer;">
-                <td>{{c.convencion_id}}</td>
-                <td>{{c.denominacion}}</td>
-                <td>{{(c.activo===1)?'SI':'NO'}}</td>
+                <td class="medio centrado">{{c.convencion_id}}</td>
+                <td>{{c.denominacion|capitalizar}}</td>
+                <td class="medio centrado">{{(c.activo===1)?'SI':'NO'}}</td>
               </tr>
             </tbody>
           </table>

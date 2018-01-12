@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Seleccione el tipo de documento
+          <small [ngClass]="{'hide': tipodocumento.tipo_id===''}">({{tipodocumento.tipo_id}}).- {{tipodocumento.denominacion}}</small>
+        </h5>
+        <div class="ibox-tools">
+          <a class="collapse-link" id="{{btnminimizar}}">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a class="dropdown-toggle hide" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li>
+              <a href="#">Config option 1</a>
+            </li>
+            <li>
+              <a href="#">Config option 2</a>
+            </li>
+          </ul>
+          <a class="close-link hide">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <form method="get" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Entidad Productora</label>
+            <div class="col-sm-10">
+              <select name="entidad" id="entidad" [(ngModel)]="entidad" class="form-control m-b" (change)="refrescar_oficinas()">
+                <option [ngValue]="entidad" *ngFor="let entidad of entidades">
+                  {{entidad.razon_social}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="hr-line-dashed" [ngClass]="{'hide': entidad.razon_social===''}"></div>
+          <div class="form-group" [ngClass]="{'hide': entidad.razon_social===''}">
+            <label class="col-sm-2 control-label">Oficina Productora</label>
+            <div class="col-sm-10">
+              <select name="oficina" id="oficina" [(ngModel)]="oficina" class="form-control m-b" (change)="refrescar_series()">
+                <option [ngValue]="oficina" *ngFor="let oficina of oficinas">
+                  {{oficina.razon_social}} ({{oficina.sede_id}})
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="hr-line-dashed" [ngClass]="{'hide': oficina.razon_social===''}"></div>
+          <div class="form-group" [ngClass]="{'hide': oficina.razon_social===''}">
+            <label class="col-sm-2 control-label">Serie</label>
+            <div class="col-sm-10">
+              <select name="serie" id="serie" [(ngModel)]="serie" class="form-control m-b" (change)="refrescar_subseries()">
+                <option [ngValue]="serie" *ngFor="let serie of series">
+                  {{serie.denominacion}} ({{serie.serie_id}})
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="hr-line-dashed" [ngClass]="{'hide': serie.serie_id===''}"></div>
+          <div class="form-group" [ngClass]="{'hide': serie.serie_id===''}">
+            <label class="col-sm-2 control-label">Subserie</label>
+            <div class="col-sm-10">
+              <select name="subserie" id="subserie" [(ngModel)]="subserie" class="form-control m-b" (change)="refrescar_tipo_documentos()">
+                <option [ngValue]="subserie" *ngFor="let subserie of subseries">
+                  {{subserie.denominacion}} ({{subserie.subserie_id}})
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="hr-line-dashed" [ngClass]="{'hide': subserie.subserie_id===''}"></div>
+          <div class="form-group" [ngClass]="{'hide': subserie.subserie_id===''}">
+            <label class="col-sm-2 control-label">Tipo Documental</label>
+            <div class="col-sm-10">
+              <select name="tipodocumento" id="tipodocumento" [(ngModel)]="tipodocumento" class="form-control m-b" (change)="enviar_tipo_documental($event)">
+                <option [ngValue]="tipodocumento" *ngFor="let tipodocumento of tipodocumentos">
+                  {{tipodocumento.denominacion}} ({{tipodocumento.tipo_id}})
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sk-spinner sk-spinner-cube-grid" [ngClass]="{'hide': !cargando}">
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+            <div class="sk-cube"></div>
+          </div>
+
+
+          <div class="hr-line-dashed hide"></div>
+          <div class="form-group hide">
+            <div class="col-sm-4 col-sm-offset-2">
+              <button class="btn btn-white" type="submit">Cancel</button>
+              <button class="btn btn-primary" type="submit">Save changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

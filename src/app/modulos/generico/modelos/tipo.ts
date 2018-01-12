@@ -8,6 +8,6 @@ export class Tipo {
     public soporte_electronico: number = 0,
     public soporte_fisico: number = 0,
     public procedimiento: string = '',
-    public activo: number = 0,
+    public activo: number = 1,
   ) { }
 }
